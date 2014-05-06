@@ -214,6 +214,11 @@ public class MainView extends javax.swing.JFrame {
         FillColorButton.setMinimumSize(new java.awt.Dimension(40, 40));
         FillColorButton.setPreferredSize(new java.awt.Dimension(40, 40));
         FillColorButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        FillColorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FillColorButtonActionPerformed(evt);
+            }
+        });
         ToolBar.add(FillColorButton);
 
         FillColorPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -421,6 +426,14 @@ public class MainView extends javax.swing.JFrame {
     private void MenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_MenuItemCloseActionPerformed
+
+    private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ColorChooserFrame().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_FillColorButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
