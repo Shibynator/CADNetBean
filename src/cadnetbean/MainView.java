@@ -44,7 +44,7 @@ public class MainView extends javax.swing.JFrame {
         EllipseButton = new javax.swing.JToggleButton();
         CircleButton = new javax.swing.JToggleButton();
         ScrollPane = new javax.swing.JScrollPane();
-        PaintPanel = new javax.swing.JPanel();
+        PaintPanel = new javax.swing.JLayeredPane();
         MenuBar = new javax.swing.JMenuBar();
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
@@ -354,7 +354,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JMenu MenuView;
-    private javax.swing.JPanel PaintPanel;
+    private javax.swing.JLayeredPane PaintPanel;
     private javax.swing.JToggleButton RectangleButton;
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JToggleButton SquareButton;
