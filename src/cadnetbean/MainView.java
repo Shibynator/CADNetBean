@@ -1,15 +1,29 @@
+/*******************************************************************************
+ * Class:	MainView.java
+ *******************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ * 
+ * Author:	Feuz Bruno (FB)
+ * 
+ * Datum:       06.05.2014
+ * 
+ * Project:	CADNetBean
+ * 
+ * Describtion:	Defines the Mainframe-Designe of the CAD.
+ *
+ * Revision:	0.0	file created
+ *              0.1     modified	FB  06.05.2014
+ ******************************************************************************/
 
+// Package definition
 package cadnetbean;
 
-
+// Import packages and libraries
 import geometricforms.*;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-/**
- *
- * @author Daxx
- */
+
 
 
 
@@ -20,10 +34,14 @@ public class MainView extends javax.swing.JFrame {
     private List<CADShape>GraphicList= new ArrayList<CADShape>();
     private CADShape ShapeStyle;
     private Point FirstClick=new Point();
+    ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
     /**
      * Creates new form MainView
      */
     public MainView() {
+	setBounds(100, 100, 500, 400); // Minimale Fenstergrösse
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
+	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
     }
 
@@ -43,6 +61,7 @@ public class MainView extends javax.swing.JFrame {
         SquareButton = new javax.swing.JToggleButton();
         EllipseButton = new javax.swing.JToggleButton();
         CircleButton = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         PaintPanel = new javax.swing.JLayeredPane();
         MenuBar = new javax.swing.JMenuBar();
@@ -64,6 +83,7 @@ public class MainView extends javax.swing.JFrame {
         ToolBar.setFloatable(false);
         ToolBar.setRollover(true);
 
+        ToolBarButtons.add(LineButton);
         LineButton.setText("L");
         LineButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         LineButton.setFocusable(false);
@@ -80,6 +100,7 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(LineButton);
 
+        ToolBarButtons.add(ArrowButton);
         ArrowButton.setText("A");
         ArrowButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ArrowButton.setFocusable(false);
@@ -96,6 +117,7 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(ArrowButton);
 
+        ToolBarButtons.add(RectangleButton);
         RectangleButton.setText("R");
         RectangleButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         RectangleButton.setFocusable(false);
@@ -112,6 +134,7 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(RectangleButton);
 
+        ToolBarButtons.add(SquareButton);
         SquareButton.setText("S");
         SquareButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         SquareButton.setFocusable(false);
@@ -128,6 +151,7 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(SquareButton);
 
+        ToolBarButtons.add(EllipseButton);
         EllipseButton.setText("E");
         EllipseButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         EllipseButton.setFocusable(false);
@@ -144,6 +168,7 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(EllipseButton);
 
+        ToolBarButtons.add(CircleButton);
         CircleButton.setText("C");
         CircleButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CircleButton.setFocusable(false);
@@ -160,6 +185,23 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(CircleButton);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(20, 20));
+        jPanel1.setMinimumSize(new java.awt.Dimension(20, 20));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        ToolBar.add(jPanel1);
+
+        ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
         ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -211,6 +253,11 @@ public class MainView extends javax.swing.JFrame {
 
         MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemClose.setText("Close");
+        MenuItemClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCloseActionPerformed(evt);
+            }
+        });
         MenuFile.add(MenuItemClose);
 
         MenuBar.add(MenuFile);
@@ -229,7 +276,6 @@ public class MainView extends javax.swing.JFrame {
         });
         MenuView.add(CheckBoxToolBar);
 
-        CheckBoxGrid.setSelected(true);
         CheckBoxGrid.setText("Grid");
         CheckBoxGrid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,7 +319,11 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemSaveActionPerformed
 
     private void CheckBoxToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxToolBarActionPerformed
-        // TODO add your handling code here:
+        if(CheckBoxToolBar.isSelected()==true){
+            ToolBar.setVisible(true);
+        } else {
+            ToolBar.setVisible(false);
+        }
     }//GEN-LAST:event_CheckBoxToolBarActionPerformed
 
     private void CheckBoxGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxGridActionPerformed
@@ -303,6 +353,10 @@ public class MainView extends javax.swing.JFrame {
     private void CircleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CircleButtonMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_CircleButtonMouseClicked
+
+    private void MenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCloseActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_MenuItemCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,5 +413,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JToggleButton SquareButton;
     private javax.swing.JToolBar ToolBar;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
