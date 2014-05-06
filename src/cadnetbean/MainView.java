@@ -28,21 +28,119 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuBar = new javax.swing.JMenuBar();
+        MenuFile = new javax.swing.JMenu();
+        MenuItemOpen = new javax.swing.JMenuItem();
+        MenuItemSave = new javax.swing.JMenuItem();
+        MenuItemPrint = new javax.swing.JMenuItem();
+        MenuItemClose = new javax.swing.JMenuItem();
+        MenuEdit = new javax.swing.JMenu();
+        MenuView = new javax.swing.JMenu();
+        CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
+        CheckBoxGrid = new javax.swing.JCheckBoxMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CAD by ZjoeFeu");
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setName("MainView"); // NOI18N
+
+        MenuBar.setAlignmentY(0.5F);
+
+        MenuFile.setText("File");
+
+        MenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemOpen.setText("open");
+        MenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemOpenActionPerformed(evt);
+            }
+        });
+        MenuFile.add(MenuItemOpen);
+
+        MenuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemSave.setText("save");
+        MenuItemSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemSaveActionPerformed(evt);
+            }
+        });
+        MenuFile.add(MenuItemSave);
+
+        MenuItemPrint.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemPrint.setText("print");
+        MenuItemPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemPrintActionPerformed(evt);
+            }
+        });
+        MenuFile.add(MenuItemPrint);
+
+        MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemClose.setText("Close");
+        MenuFile.add(MenuItemClose);
+
+        MenuBar.add(MenuFile);
+
+        MenuEdit.setText("Edit");
+        MenuBar.add(MenuEdit);
+
+        MenuView.setText("View");
+
+        CheckBoxToolBar.setSelected(true);
+        CheckBoxToolBar.setText("Toolbar");
+        CheckBoxToolBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxToolBarActionPerformed(evt);
+            }
+        });
+        MenuView.add(CheckBoxToolBar);
+
+        CheckBoxGrid.setSelected(true);
+        CheckBoxGrid.setText("Grid");
+        CheckBoxGrid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxGridActionPerformed(evt);
+            }
+        });
+        MenuView.add(CheckBoxGrid);
+
+        MenuBar.add(MenuView);
+
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuItemPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPrintActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemPrintActionPerformed
+
+    private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemOpenActionPerformed
+
+    private void MenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemSaveActionPerformed
+
+    private void CheckBoxToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxToolBarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBoxToolBarActionPerformed
+
+    private void CheckBoxGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxGridActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBoxGridActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +178,15 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem CheckBoxGrid;
+    private javax.swing.JCheckBoxMenuItem CheckBoxToolBar;
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenu MenuEdit;
+    private javax.swing.JMenu MenuFile;
+    private javax.swing.JMenuItem MenuItemClose;
+    private javax.swing.JMenuItem MenuItemOpen;
+    private javax.swing.JMenuItem MenuItemPrint;
+    private javax.swing.JMenuItem MenuItemSave;
+    private javax.swing.JMenu MenuView;
     // End of variables declaration//GEN-END:variables
 }
