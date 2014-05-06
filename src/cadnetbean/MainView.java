@@ -20,6 +20,7 @@ package cadnetbean;
 
 // Import packages and libraries
 import geometricforms.*;
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -428,11 +429,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemCloseActionPerformed
 
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ColorChooserFrame().setVisible(true);
-            }
-        });
+        //JColorChooser FillColor = new JColorChooser(FillColorPanel.setBackground(FillColor));
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
 
