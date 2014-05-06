@@ -1,17 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package cadnetbean;
 
+
+import geometricforms.*;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Daxx
  */
+
+
+
+
 public class MainView extends javax.swing.JFrame {
 
+    
+    private List<CADShape>GraphicList= new ArrayList<CADShape>();
+    private CADShape ShapeStyle;
+    private Point FirstClick=new Point();
     /**
      * Creates new form MainView
      */
