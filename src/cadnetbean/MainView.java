@@ -56,7 +56,11 @@ public class MainView extends javax.swing.JFrame {
         SquareButton = new javax.swing.JToggleButton();
         EllipseButton = new javax.swing.JToggleButton();
         CircleButton = new javax.swing.JToggleButton();
-        jPanel1 = new javax.swing.JPanel();
+        ReservePanel = new javax.swing.JPanel();
+        FillColorButton = new javax.swing.JButton();
+        FillColorPanel = new javax.swing.JPanel();
+        LineColorButton = new javax.swing.JButton();
+        LineColorPanel = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         PaintPanel = new javax.swing.JLayeredPane();
         MenuBar = new javax.swing.JMenuBar();
@@ -72,11 +76,15 @@ public class MainView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CAD by ZjoeFeu");
+        setBackground(java.awt.SystemColor.activeCaption);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("MainView"); // NOI18N
 
         ToolBar.setFloatable(false);
         ToolBar.setRollover(true);
+        ToolBar.setMaximumSize(new java.awt.Dimension(142, 42));
+        ToolBar.setMinimumSize(new java.awt.Dimension(142, 42));
+        ToolBar.setPreferredSize(new java.awt.Dimension(142, 42));
 
         ToolBarButtons.add(LineButton);
         LineButton.setText("L");
@@ -84,9 +92,9 @@ public class MainView extends javax.swing.JFrame {
         LineButton.setFocusable(false);
         LineButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         LineButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        LineButton.setMaximumSize(new java.awt.Dimension(20, 20));
+        LineButton.setMaximumSize(new java.awt.Dimension(40, 40));
         LineButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        LineButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        LineButton.setPreferredSize(new java.awt.Dimension(40, 40));
         LineButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         LineButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,9 +109,9 @@ public class MainView extends javax.swing.JFrame {
         ArrowButton.setFocusable(false);
         ArrowButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ArrowButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        ArrowButton.setMaximumSize(new java.awt.Dimension(20, 20));
-        ArrowButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        ArrowButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        ArrowButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        ArrowButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        ArrowButton.setPreferredSize(new java.awt.Dimension(40, 40));
         ArrowButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         ArrowButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -118,9 +126,9 @@ public class MainView extends javax.swing.JFrame {
         RectangleButton.setFocusable(false);
         RectangleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         RectangleButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        RectangleButton.setMaximumSize(new java.awt.Dimension(20, 20));
-        RectangleButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        RectangleButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        RectangleButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        RectangleButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        RectangleButton.setPreferredSize(new java.awt.Dimension(40, 40));
         RectangleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         RectangleButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,9 +143,9 @@ public class MainView extends javax.swing.JFrame {
         SquareButton.setFocusable(false);
         SquareButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         SquareButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        SquareButton.setMaximumSize(new java.awt.Dimension(20, 20));
-        SquareButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        SquareButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        SquareButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        SquareButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        SquareButton.setPreferredSize(new java.awt.Dimension(40, 40));
         SquareButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         SquareButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -152,9 +160,9 @@ public class MainView extends javax.swing.JFrame {
         EllipseButton.setFocusable(false);
         EllipseButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         EllipseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        EllipseButton.setMaximumSize(new java.awt.Dimension(20, 20));
-        EllipseButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        EllipseButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        EllipseButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        EllipseButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        EllipseButton.setPreferredSize(new java.awt.Dimension(40, 40));
         EllipseButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         EllipseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -169,9 +177,9 @@ public class MainView extends javax.swing.JFrame {
         CircleButton.setFocusable(false);
         CircleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         CircleButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        CircleButton.setMaximumSize(new java.awt.Dimension(20, 20));
-        CircleButton.setMinimumSize(new java.awt.Dimension(20, 20));
-        CircleButton.setPreferredSize(new java.awt.Dimension(20, 20));
+        CircleButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        CircleButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        CircleButton.setPreferredSize(new java.awt.Dimension(40, 40));
         CircleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         CircleButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -180,25 +188,85 @@ public class MainView extends javax.swing.JFrame {
         });
         ToolBar.add(CircleButton);
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(20, 20));
-        jPanel1.setMinimumSize(new java.awt.Dimension(20, 20));
+        ReservePanel.setMaximumSize(new java.awt.Dimension(40, 40));
+        ReservePanel.setMinimumSize(new java.awt.Dimension(40, 40));
+        ReservePanel.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+        javax.swing.GroupLayout ReservePanelLayout = new javax.swing.GroupLayout(ReservePanel);
+        ReservePanel.setLayout(ReservePanelLayout);
+        ReservePanelLayout.setHorizontalGroup(
+            ReservePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+        ReservePanelLayout.setVerticalGroup(
+            ReservePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        ToolBar.add(jPanel1);
+        ToolBar.add(ReservePanel);
+
+        FillColorButton.setText("FillC");
+        FillColorButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        FillColorButton.setFocusable(false);
+        FillColorButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        FillColorButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        FillColorButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        FillColorButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        FillColorButton.setPreferredSize(new java.awt.Dimension(40, 40));
+        FillColorButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        ToolBar.add(FillColorButton);
+
+        FillColorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        FillColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        FillColorPanel.setMaximumSize(new java.awt.Dimension(40, 40));
+        FillColorPanel.setMinimumSize(new java.awt.Dimension(40, 40));
+
+        javax.swing.GroupLayout FillColorPanelLayout = new javax.swing.GroupLayout(FillColorPanel);
+        FillColorPanel.setLayout(FillColorPanelLayout);
+        FillColorPanelLayout.setHorizontalGroup(
+            FillColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+        FillColorPanelLayout.setVerticalGroup(
+            FillColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        ToolBar.add(FillColorPanel);
+
+        LineColorButton.setText("LineC");
+        LineColorButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        LineColorButton.setFocusable(false);
+        LineColorButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        LineColorButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        LineColorButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        LineColorButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        LineColorButton.setPreferredSize(new java.awt.Dimension(40, 40));
+        LineColorButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        ToolBar.add(LineColorButton);
+
+        LineColorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        LineColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        LineColorPanel.setMaximumSize(new java.awt.Dimension(40, 40));
+        LineColorPanel.setMinimumSize(new java.awt.Dimension(40, 40));
+
+        javax.swing.GroupLayout LineColorPanelLayout = new javax.swing.GroupLayout(LineColorPanel);
+        LineColorPanel.setLayout(LineColorPanelLayout);
+        LineColorPanelLayout.setHorizontalGroup(
+            LineColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+        LineColorPanelLayout.setVerticalGroup(
+            LineColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        ToolBar.add(LineColorPanel);
 
         ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
         ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPane.setAutoscrolls(true);
 
         PaintPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -206,7 +274,7 @@ public class MainView extends javax.swing.JFrame {
         PaintPanel.setLayout(PaintPanelLayout);
         PaintPanelLayout.setHorizontalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
+            .addGap(0, 444, Short.MAX_VALUE)
         );
         PaintPanelLayout.setVerticalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,6 +283,7 @@ public class MainView extends javax.swing.JFrame {
 
         ScrollPane.setViewportView(PaintPanel);
 
+        MenuBar.setBackground(java.awt.SystemColor.activeCaption);
         MenuBar.setAlignmentY(0.5F);
 
         MenuFile.setText("File");
@@ -247,7 +316,7 @@ public class MainView extends javax.swing.JFrame {
         MenuFile.add(MenuItemPrint);
 
         MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
-        MenuItemClose.setText("Close");
+        MenuItemClose.setText("close");
         MenuItemClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemCloseActionPerformed(evt);
@@ -293,9 +362,9 @@ public class MainView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane))
+                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
         );
 
         pack();
@@ -360,7 +429,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem CheckBoxToolBar;
     private javax.swing.JToggleButton CircleButton;
     private javax.swing.JToggleButton EllipseButton;
+    private javax.swing.JButton FillColorButton;
+    private javax.swing.JPanel FillColorPanel;
     private javax.swing.JToggleButton LineButton;
+    private javax.swing.JButton LineColorButton;
+    private javax.swing.JPanel LineColorPanel;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuEdit;
     private javax.swing.JMenu MenuFile;
@@ -371,9 +444,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu MenuView;
     private javax.swing.JLayeredPane PaintPanel;
     private javax.swing.JToggleButton RectangleButton;
+    private javax.swing.JPanel ReservePanel;
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JToggleButton SquareButton;
     private javax.swing.JToolBar ToolBar;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
