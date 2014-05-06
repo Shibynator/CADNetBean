@@ -28,6 +28,8 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ToolBar = new javax.swing.JToolBar();
+        ScrollPane = new javax.swing.JScrollPane();
         MenuBar = new javax.swing.JMenuBar();
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
@@ -43,6 +45,11 @@ public class MainView extends javax.swing.JFrame {
         setTitle("CAD by ZjoeFeu");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("MainView"); // NOI18N
+
+        ToolBar.setRollover(true);
+
+        ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         MenuBar.setAlignmentY(0.5F);
 
@@ -112,11 +119,15 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,5 +199,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JMenu MenuView;
+    private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JToolBar ToolBar;
     // End of variables declaration//GEN-END:variables
 }
