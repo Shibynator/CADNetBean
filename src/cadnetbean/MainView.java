@@ -22,8 +22,11 @@ package cadnetbean;
 import geometricforms.*;
 import java.awt.Color;
 import java.awt.Point;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class MainView extends javax.swing.JFrame {
  
@@ -32,6 +35,33 @@ public class MainView extends javax.swing.JFrame {
     private CADShape ShapeStyle;
     private Point FirstClick=new Point();
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
+    
+    private PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent arg0) {
+            Object sourceObject = arg0.getSource();
+
+            if (sourceObject instanceof CADShape) {
+
+                if (arg0.getPropertyName().equals("Selected")) {
+
+                    if((Boolean)arg0.getNewValue()!=false){
+                        
+                        for (CADShape item : GraphicList) {
+                            if(item!=sourceObject){
+                                item.setSelected(false);
+                            }
+                        }
+                        ((CADShape) sourceObject).setBackground(Color.green);    
+                    }
+                    else{
+                        ((CADShape) sourceObject).setBackground(Color.white);
+                    }
+                        
+                    
+                    }
+                }
+            }
+        };
     
     // Creates Frame of MainView
     public MainView() {
@@ -275,6 +305,19 @@ public class MainView extends javax.swing.JFrame {
         ScrollPane.setAutoscrolls(true);
 
         PaintPanel.setBackground(new java.awt.Color(255, 255, 255));
+        PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PaintPanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PaintPanelMousePressed(evt);
+            }
+        });
+        PaintPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                PaintPanelMouseDragged(evt);
+            }
+        });
 
         javax.swing.GroupLayout PaintPanelLayout = new javax.swing.GroupLayout(PaintPanel);
         PaintPanel.setLayout(PaintPanelLayout);
@@ -409,7 +452,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_LineButtonMouseClicked
 
     private void RectangleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RectangleButtonMouseClicked
-        // TODO add your handling code here:
+        ShapeStyle=new CADRectangle();
     }//GEN-LAST:event_RectangleButtonMouseClicked
 
     private void SquareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SquareButtonMouseClicked
@@ -431,6 +474,31 @@ public class MainView extends javax.swing.JFrame {
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
         //JColorChooser FillColor = new JColorChooser(FillColorPanel.setBackground(FillColor));
     }//GEN-LAST:event_FillColorButtonActionPerformed
+
+    private void PaintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMousePressed
+        FirstClick = evt.getPoint();
+        try {
+            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
+            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
+        } catch (Exception error) {//TODO: Ist vielleicht überflüssig, ->immer mind. eine form angewählt
+            // TODO Auto-generated catch block
+            error.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
+        }
+        PaintPanel.add(GraphicList.get(GraphicList.size()-1));    }//GEN-LAST:event_PaintPanelMousePressed
+
+    private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
+        GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, FirstClick.y, evt.getX()-FirstClick.x, evt.getY()-FirstClick.y);				
+	GraphicList.get(GraphicList.size()-1).repaint();
+    }//GEN-LAST:event_PaintPanelMouseDragged
+
+    private void PaintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseClicked
+        for (CADShape item : GraphicList) {
+
+            item.setSelected(false);
+            item.setBackground(Color.white);//TODO: Hintergrundfarbe?
+        }
+    }//GEN-LAST:event_PaintPanelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
