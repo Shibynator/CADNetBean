@@ -132,7 +132,11 @@ public class CADShape extends JPanel {
         super.paint(g);
 
         g.setColor(DrawColor);
-        g.drawImage(ResizeIcon, 0, 0, 50, 50, this);
+        
+        if(getSelected()==true){
+        int iconsize=30;
+        g.drawImage(ResizeIcon,getWidth()-iconsize,getHeight()-iconsize, iconsize, iconsize, this);
+        }
     }
 
     @Override
@@ -149,9 +153,9 @@ public class CADShape extends JPanel {
 
     public void LoadImageApp() {
         try {
-            ResizeIcon = ImageIO.read(new File("\\Resources\\ResizeIcon.jpg"));
+            ResizeIcon = ImageIO.read(new File("Resources\\ResizeIcon.jpg"));
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Datei für ResizeIcon nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
         }
     }
 }
