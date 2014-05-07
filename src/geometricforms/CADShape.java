@@ -34,6 +34,8 @@ public class CADShape extends JPanel {
 
     protected Boolean Selected = false;
     protected BufferedImage ResizeIcon;
+    protected int iconsize=30;
+    protected Rectangle iconframe;
 
     public Boolean getSelected() {
         return Selected;
@@ -116,8 +118,14 @@ public class CADShape extends JPanel {
 
                 super.mouseDragged(e);//TODO: Vielleicht überflüssig
 
-                setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);
-
+                if(iconframe.contains(e.getPoint())){
+                    
+                    setBounds(getBounds().x,getBounds().y,getBounds().width+(e.getX()- ClickOffsetPoint.x),getBounds().height+(e.getY()-ClickOffsetPoint.y));
+                    ClickOffsetPoint=e.getPoint();
+                }
+                else {
+                    setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);
+                }
                 repaint();
 
             }
@@ -132,10 +140,12 @@ public class CADShape extends JPanel {
         super.paint(g);
 
         g.setColor(DrawColor);
-        
-        if(getSelected()==true){
-        int iconsize=30;
-        g.drawImage(ResizeIcon,getWidth()-iconsize,getHeight()-iconsize, iconsize, iconsize, this);
+
+        if (getSelected() == true) {
+
+//            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
+             g.drawImage(ResizeIcon,iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
+             
         }
     }
 
@@ -158,4 +168,13 @@ public class CADShape extends JPanel {
             JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
         }
     }
+
+    @Override
+    public void setBounds(int x, int y, int width, int height) {
+        super.setBounds(x, y, width, height);
+        
+        iconframe= new Rectangle(width-iconsize,height-iconsize,iconsize,iconsize);
+    }
+    
+    
 }
