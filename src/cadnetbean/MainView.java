@@ -456,15 +456,15 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_RectangleButtonMouseClicked
 
     private void SquareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SquareButtonMouseClicked
-        // TODO add your handling code here:
+        ShapeStyle=new CADSquare();
     }//GEN-LAST:event_SquareButtonMouseClicked
 
     private void EllipseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EllipseButtonMouseClicked
-        // TODO add your handling code here:
+        ShapeStyle=new CADEllipse();
     }//GEN-LAST:event_EllipseButtonMouseClicked
 
     private void CircleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CircleButtonMouseClicked
-        // TODO add your handling code here:
+        ShapeStyle=new CADCircle();
     }//GEN-LAST:event_CircleButtonMouseClicked
 
     private void MenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCloseActionPerformed
