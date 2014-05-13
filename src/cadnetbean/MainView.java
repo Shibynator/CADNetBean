@@ -605,10 +605,10 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     public void saveToFile(String filename) throws IOException { 
     // Ausschreiben der Liste in das File 
         FileOutputStream file = new FileOutputStream(filename); 
-        ObjectOutputStream OutputStream = new ObjectOutputStream(file); 
-        OutputStream.writeObject(GraphicList); 
-        OutputStream.flush(); 
-        OutputStream.close(); 
+        try (ObjectOutputStream OutputStream = new ObjectOutputStream(file)) {
+            OutputStream.writeObject(GraphicList);
+            OutputStream.flush();
+        } 
     }
 
     /*
