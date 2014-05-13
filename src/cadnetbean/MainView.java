@@ -27,10 +27,14 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.io.*;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class MainView extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame implements Serializable{
  
     // Attributs
+    private static final long serialVersionUID = 1L;
     private List<CADShape>GraphicList= new ArrayList<CADShape>();
     private CADShape ShapeStyle;
     private Point FirstClick=new Point();
@@ -69,6 +73,7 @@ public class MainView extends javax.swing.JFrame {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
 	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
+        //GraphicList.add(ShapeStyle);
     }
 
     /**
@@ -424,11 +429,39 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemPrintActionPerformed
 
     private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
-        // TODO add your handling code here:
+        if (evt.getActionCommand().equals("open") == true) {
+            JFileChooser OPEN = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".cad files", "cad");
+            OPEN.setFileFilter(filter);
+            OPEN.setDialogTitle("Öffnen...");
+            OPEN.setDialogType(JFileChooser.OPEN_DIALOG); // Dialog zum Oeffnen
+            int returnVal = OPEN.showOpenDialog(this); // Dialog an Parent-Window anhaengen 
+            if (returnVal == JFileChooser.APPROVE_OPTION) System.out.println("Ihre Wahl zum öffnen: " + OPEN.getSelectedFile().getName());
+            try {
+                loadFromFile(OPEN.getSelectedFile().getAbsolutePath());
+            } catch (ClassNotFoundException | IOException e) {
+                e.printStackTrace();    // TODO Auto-generated catch block 
+                JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden", "File not found", JOptionPane.OK_CANCEL_OPTION);
+            }
+        }
     }//GEN-LAST:event_MenuItemOpenActionPerformed
 
     private void MenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveActionPerformed
-        // TODO add your handling code here:
+        if (evt.getActionCommand().equals("save") == true) {
+            JFileChooser SAVE = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".cad files", "cad");
+            SAVE.setFileFilter(filter);
+            SAVE.setDialogTitle("Speichern unter ...");
+            SAVE.setDialogType(JFileChooser.SAVE_DIALOG);
+            int returnVal = SAVE.showSaveDialog(this); // Dialog an Parent-Window anhaengen 
+            if (returnVal == JFileChooser.APPROVE_OPTION) System.out.println("Ihre Wahl zum Speichern: " + SAVE.getSelectedFile().getName());
+            try {
+                saveToFile(SAVE.getSelectedFile().getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Datei konnte nicht gespeichert werden", "File not saved", JOptionPane.OK_CANCEL_OPTION);
+            }
+        }
     }//GEN-LAST:event_MenuItemSaveActionPerformed
 
     private void CheckBoxToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxToolBarActionPerformed
@@ -500,7 +533,31 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_PaintPanelMouseClicked
 
+    /*
+    * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
+    */
+    public void saveToFile(String filename) throws IOException { 
+    // Ausschreiben der Liste in das File 
+        FileOutputStream file = new FileOutputStream(filename); 
+        ObjectOutputStream OutputStream = new ObjectOutputStream(file); 
+        OutputStream.writeObject(GraphicList); 
+        OutputStream.flush(); 
+        OutputStream.close(); 
+    }
 
+    /*
+    * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
+    */
+    @SuppressWarnings("unchecked") 
+    public void loadFromFile(String filename) throws IOException, ClassNotFoundException{
+        // Einlesen vom File 
+        GraphicList = new ArrayList<CADShape>(); 
+        FileInputStream file = new FileInputStream(filename); 
+        ObjectInputStream InputStream = new ObjectInputStream(file); 
+        GraphicList=(ArrayList<CADShape>) InputStream.readObject(); 
+        InputStream.close(); 
+        repaint(); 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton ArrowButton;
     private javax.swing.JCheckBoxMenuItem CheckBoxGrid;
