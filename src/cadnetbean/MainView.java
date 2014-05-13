@@ -51,9 +51,10 @@ public class MainView extends javax.swing.JFrame {
                                 item.setSelected(false);
                             }
                         }
-                        ((CADShape) sourceObject).setBackground(Color.green);    
+                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren    
                     }
                     else{
+                        ((CADShape) sourceObject).setOpaque(false);
                         ((CADShape) sourceObject).setBackground(Color.white);
                     }
                         
@@ -448,7 +449,8 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_ArrowButtonMouseClicked
 
     private void LineButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LineButtonMouseClicked
-        // TODO add your handling code here:
+        ShapeStyle=new CADLine();
+        
     }//GEN-LAST:event_LineButtonMouseClicked
 
     private void RectangleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RectangleButtonMouseClicked
@@ -496,7 +498,8 @@ public class MainView extends javax.swing.JFrame {
         for (CADShape item : GraphicList) {
 
             item.setSelected(false);
-            item.setBackground(Color.white);//TODO: Hintergrundfarbe?
+//            item.setBackground(Color.white);//TODO: Hintergrundfarbe?
+            item.setOpaque(false);
         }
     }//GEN-LAST:event_PaintPanelMouseClicked
 
