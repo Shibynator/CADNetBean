@@ -617,12 +617,27 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     @SuppressWarnings("unchecked") 
     public void loadFromFile(String filename) throws IOException, ClassNotFoundException{
         // Einlesen vom File 
+        for (CADShape item : GraphicList) {
+            
+            PaintPanel.remove(item);
+
+        }
+        
         GraphicList = new ArrayList<CADShape>(); 
         FileInputStream file = new FileInputStream(filename); 
         ObjectInputStream InputStream = new ObjectInputStream(file); 
         GraphicList=(ArrayList<CADShape>) InputStream.readObject(); 
         InputStream.close(); 
-        repaint(); 
+        
+        
+        for (CADShape item : GraphicList) {
+            
+            PaintPanel.add(item);
+            item.addPropertyChangeListener(ShapePropertyListener);
+            item.InitMouseListener();
+            
+        }
+        PaintPanel.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton ArrowButton;

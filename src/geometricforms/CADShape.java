@@ -17,6 +17,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,7 +37,7 @@ public class CADShape extends JPanel {
     public boolean IsFilled;
     
     protected Boolean Selected = false;
-    protected BufferedImage ResizeIcon;
+//    protected BufferedImage ResizeIcon;
     protected int iconsize=30;
     protected Rectangle iconframe;
 
@@ -73,7 +75,7 @@ public class CADShape extends JPanel {
     private void Initialise() {
 
         setOpaque(false);
-        LoadImageApp();
+//        LoadImageApp();
         
 
         addMouseListener(new MouseAdapter() {
@@ -145,9 +147,14 @@ public class CADShape extends JPanel {
         
         if (getSelected() == true) {
 
-//            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
-             g.drawImage(ResizeIcon,iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
-             
+            try {
+                //            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
+                g.drawImage(ImageIO.read(new File("src\\images\\ResizeIcon.jpg")),iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
+            } catch (IOException ex) {
+                Logger.getLogger(CADShape.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
+            }
+//             g.drawImage(ResizeIcon,iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
         }
     }
 
@@ -163,13 +170,13 @@ public class CADShape extends JPanel {
         PropertyEvent.removePropertyChangeListener(listener);
     }
 
-    public void LoadImageApp() {
-        try {
-            ResizeIcon = ImageIO.read(new File("Resources\\ResizeIcon.jpg"));
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
-        }
-    }
+//    public void LoadImageApp() {
+//        try {
+//            ResizeIcon = ImageIO.read(new File("Resources\\ResizeIcon.jpg"));
+//        } catch (IOException e) {
+//            JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
+//        }
+//    }
 
     @Override
     public void setBounds(int x, int y, int width, int height) {
@@ -178,5 +185,45 @@ public class CADShape extends JPanel {
         iconframe= new Rectangle(width-iconsize,height-iconsize,iconsize,iconsize);
     }
     
+    
+    public void InitMouseListener(){
+        
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+
+                setSelected(true);
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+
+                ClickOffsetPoint = arg0.getPoint();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+                super.mouseEntered(e);
+
+                if (getSelected() == false) {
+                    setOpaque(true);
+                    setBackground(Color.lightGray);
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+                super.mouseExited(e);
+                
+                if(getSelected()==false){
+                setOpaque(false);
+                setBackground(Color.white);
+                }
+            }
+        });
+    }
     
 }
