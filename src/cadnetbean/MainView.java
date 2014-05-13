@@ -507,7 +507,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_MenuItemCloseActionPerformed
 
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
-        //JColorChooser FillColor = new JColorChooser(FillColorPanel.setBackground(FillColor));
+        for (CADShape item : GraphicList) {
+            if(item.getSelected()){
+                 item.IsFilled=true;
+            }
+        }
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
     private void PaintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMousePressed
@@ -523,7 +527,18 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         PaintPanel.add(GraphicList.get(GraphicList.size()-1));    }//GEN-LAST:event_PaintPanelMousePressed
 
     private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
-        GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, FirstClick.y, evt.getX()-FirstClick.x, evt.getY()-FirstClick.y);				
+        if(evt.getX()-FirstClick.x>0&&evt.getY()-FirstClick.y>0)//positiv width and height
+            GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, FirstClick.y, evt.getX()-FirstClick.x, evt.getY()-FirstClick.y);				
+        
+        else if(evt.getX()-FirstClick.x<0&&evt.getY()-FirstClick.y>0)//negativ width and positiv height
+            GraphicList.get(GraphicList.size()-1).setBounds(evt.getX(), FirstClick.y, FirstClick.x-evt.getX(), evt.getY()-FirstClick.y);	
+        
+        else if(evt.getX()-FirstClick.x>0&&evt.getY()-FirstClick.y<0)//positiv width and negativ height
+            GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, evt.getY(), evt.getX()-FirstClick.x, FirstClick.y-evt.getY());
+        
+        else if(evt.getX()-FirstClick.x<0&&evt.getY()-FirstClick.y<0)//negativ width and negativ height
+            GraphicList.get(GraphicList.size()-1).setBounds(evt.getX(), evt.getY(), FirstClick.x-evt.getX(), FirstClick.y-evt.getY());
+        
 	GraphicList.get(GraphicList.size()-1).repaint();
     }//GEN-LAST:event_PaintPanelMouseDragged
 
