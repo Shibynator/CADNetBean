@@ -31,7 +31,9 @@ public class CADShape extends JPanel {
     private static final long serialVersionUID = 1L;
     public Point ClickOffsetPoint = new Point();
     public Color DrawColor = Color.black;
-
+    public Color FillColor =Color.red;//TODO: Für Testzwecke
+    public boolean IsFilled;
+    
     protected Boolean Selected = false;
     protected BufferedImage ResizeIcon;
     protected int iconsize=30;
@@ -119,7 +121,7 @@ public class CADShape extends JPanel {
                 super.mouseDragged(e);//TODO: Vielleicht überflüssig
 
                 if(iconframe.contains(e.getPoint())){
-                    
+                      
                     setBounds(getBounds().x,getBounds().y,getBounds().width+(e.getX()- ClickOffsetPoint.x),getBounds().height+(e.getY()-ClickOffsetPoint.y));
                     ClickOffsetPoint=e.getPoint();
                 }
@@ -138,9 +140,9 @@ public class CADShape extends JPanel {
     public void paint(Graphics g) {
 
         super.paint(g);
-
-        g.setColor(DrawColor);
-
+        
+//        g.setColor(DrawColor);
+        
         if (getSelected() == true) {
 
 //            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
