@@ -22,6 +22,7 @@ package cadnetbean;
 import geometricforms.*;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.print.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private List<CADShape>GraphicList= new ArrayList<CADShape>();
     private CADShape ShapeStyle;
     private Point FirstClick=new Point();
+    private boolean Saved = false;
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
     
     private PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
@@ -74,7 +76,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
 	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
-        //GraphicList.add(ShapeStyle);
     }
 
     /**
@@ -107,9 +108,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuItemPrint = new javax.swing.JMenuItem();
         MenuItemClose = new javax.swing.JMenuItem();
         MenuEdit = new javax.swing.JMenu();
+        MenuItemDelet = new javax.swing.JMenuItem();
         MenuView = new javax.swing.JMenu();
         CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
         CheckBoxGrid = new javax.swing.JCheckBoxMenuItem();
+        MenuItemBackgroundcolor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CAD by ZjoeFeu");
@@ -285,6 +288,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         LineColorButton.setMinimumSize(new java.awt.Dimension(40, 40));
         LineColorButton.setPreferredSize(new java.awt.Dimension(40, 40));
         LineColorButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        LineColorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LineColorButtonActionPerformed(evt);
+            }
+        });
         ToolBar.add(LineColorButton);
 
         LineColorPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -305,12 +313,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
 
         ToolBar.add(LineColorPanel);
 
-        ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
         ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ScrollPane.setAutoscrolls(true);
 
-        PaintPanel.setBackground(new java.awt.Color(255, 255, 255));
+        PaintPanel.setBackground(java.awt.Color.white);
         PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PaintPanelMouseClicked(evt);
@@ -382,6 +389,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuBar.add(MenuFile);
 
         MenuEdit.setText("Edit");
+
+        MenuItemDelet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
+        MenuItemDelet.setText("delet");
+        MenuEdit.add(MenuItemDelet);
+
         MenuBar.add(MenuEdit);
 
         MenuView.setText("View");
@@ -402,6 +414,14 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             }
         });
         MenuView.add(CheckBoxGrid);
+
+        MenuItemBackgroundcolor.setText("set Backgroundcolor");
+        MenuItemBackgroundcolor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemBackgroundcolorActionPerformed(evt);
+            }
+        });
+        MenuView.add(MenuItemBackgroundcolor);
 
         MenuBar.add(MenuView);
 
@@ -426,7 +446,9 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuItemPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPrintActionPerformed
-        // TODO add your handling code here:
+        if (evt.getActionCommand().equals("print") == true) {
+            
+        }
     }//GEN-LAST:event_MenuItemPrintActionPerformed
 
     private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
@@ -458,10 +480,12 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             if (returnVal == JFileChooser.APPROVE_OPTION) System.out.println("Ihre Wahl zum Speichern: " + SAVE.getSelectedFile().getName());
             try {
                 saveToFile(SAVE.getSelectedFile().getAbsolutePath());
+                Saved = true;
             } catch (IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Datei konnte nicht gespeichert werden", "File not saved", JOptionPane.OK_CANCEL_OPTION);
             }
+            
         }
     }//GEN-LAST:event_MenuItemSaveActionPerformed
 
@@ -503,13 +527,22 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_CircleButtonMouseClicked
 
     private void MenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCloseActionPerformed
-        System.exit(0);
+        if (evt.getActionCommand().equals("close") == true) {
+            if(Saved == true){
+              System.exit(0);  
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Datei ist nicht gespeichert", "File not saved", JOptionPane.OK_CANCEL_OPTION); 
+            }
+        }
     }//GEN-LAST:event_MenuItemCloseActionPerformed
 
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
                  item.IsFilled=true;
+                 item.FillColor = JColorChooser.showDialog(this, null, item.FillColor);
+                 FillColorPanel.setBackground(item.FillColor);
             }
         }
     }//GEN-LAST:event_FillColorButtonActionPerformed
@@ -551,6 +584,21 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         }
     }//GEN-LAST:event_PaintPanelMouseClicked
 
+    private void LineColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineColorButtonActionPerformed
+        for (CADShape item : GraphicList) {
+            if(item.getSelected()){
+                 item.DrawColor = JColorChooser.showDialog(this, null, item.DrawColor);
+                 LineColorPanel.setBackground(item.DrawColor);
+            }
+        }
+    }//GEN-LAST:event_LineColorButtonActionPerformed
+
+    private void MenuItemBackgroundcolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemBackgroundcolorActionPerformed
+        Color CC = JColorChooser.showDialog(this, null, PaintPanel.getBackground());
+        PaintPanel.setBackground(CC);
+        ScrollPane.setBackground(CC);
+    }//GEN-LAST:event_MenuItemBackgroundcolorActionPerformed
+
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
     */
@@ -590,7 +638,9 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuEdit;
     private javax.swing.JMenu MenuFile;
+    private javax.swing.JMenuItem MenuItemBackgroundcolor;
     private javax.swing.JMenuItem MenuItemClose;
+    private javax.swing.JMenuItem MenuItemDelet;
     private javax.swing.JMenuItem MenuItemOpen;
     private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
