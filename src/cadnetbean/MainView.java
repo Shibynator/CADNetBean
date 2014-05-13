@@ -38,6 +38,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private static final long serialVersionUID = 1L;
     private List<CADShape>GraphicList= new ArrayList<CADShape>();
     private CADShape ShapeStyle;
+    private CADShape get;
     private Point FirstClick=new Point();
     private boolean Saved = false;
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
@@ -108,6 +109,8 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuItemPrint = new javax.swing.JMenuItem();
         MenuItemClose = new javax.swing.JMenuItem();
         MenuEdit = new javax.swing.JMenu();
+        MenuItemCopy = new javax.swing.JMenuItem();
+        MenuItemPaste = new javax.swing.JMenuItem();
         MenuItemDelet = new javax.swing.JMenuItem();
         MenuView = new javax.swing.JMenu();
         CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
@@ -390,8 +393,31 @@ public class MainView extends javax.swing.JFrame implements Serializable{
 
         MenuEdit.setText("Edit");
 
+        MenuItemCopy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemCopy.setText("copy");
+        MenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCopyActionPerformed(evt);
+            }
+        });
+        MenuEdit.add(MenuItemCopy);
+
+        MenuItemPaste.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemPaste.setText("paste");
+        MenuItemPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemPasteActionPerformed(evt);
+            }
+        });
+        MenuEdit.add(MenuItemPaste);
+
         MenuItemDelet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
         MenuItemDelet.setText("delet");
+        MenuItemDelet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemDeletActionPerformed(evt);
+            }
+        });
         MenuEdit.add(MenuItemDelet);
 
         MenuBar.add(MenuEdit);
@@ -599,6 +625,29 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         ScrollPane.setBackground(CC);
     }//GEN-LAST:event_MenuItemBackgroundcolorActionPerformed
 
+    private void MenuItemDeletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemDeletActionPerformed
+        for (CADShape item : GraphicList) {
+            if(item.getSelected()){
+                 PaintPanel.remove(item);
+                 GraphicList.remove(item);
+            }
+        }
+        PaintPanel.repaint();
+    }//GEN-LAST:event_MenuItemDeletActionPerformed
+
+    private void MenuItemPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPasteActionPerformed
+        GraphicList.add(get);
+        PaintPanel.repaint();
+    }//GEN-LAST:event_MenuItemPasteActionPerformed
+
+    private void MenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCopyActionPerformed
+        for (CADShape item : GraphicList) {
+            if(item.getSelected()){
+                get = GraphicList.get(GraphicList.indexOf(item));
+            }
+        }
+    }//GEN-LAST:event_MenuItemCopyActionPerformed
+
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
     */
@@ -655,8 +704,10 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JMenu MenuFile;
     private javax.swing.JMenuItem MenuItemBackgroundcolor;
     private javax.swing.JMenuItem MenuItemClose;
+    private javax.swing.JMenuItem MenuItemCopy;
     private javax.swing.JMenuItem MenuItemDelet;
     private javax.swing.JMenuItem MenuItemOpen;
+    private javax.swing.JMenuItem MenuItemPaste;
     private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JMenu MenuView;

@@ -66,6 +66,28 @@
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItemCopy">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+C"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="copy"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemCopyActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItemPaste">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+V"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="paste"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemPasteActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemDelet">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
@@ -73,6 +95,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="delet"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemDeletActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
