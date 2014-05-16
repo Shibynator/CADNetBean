@@ -28,6 +28,12 @@ public class CADSquare extends CADRectangle {
 		super(Frame);
 		// TODO Auto-generated constructor stub
 	}
+        
+        public CADSquare(CADShape copy){
+		
+		super(copy);
+		
+	}
 
 	
 	@Override

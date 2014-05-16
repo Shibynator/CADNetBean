@@ -32,12 +32,18 @@ public class CADRectangle extends CADShape{
 		super(Frame);
 		
 	}
+        
+        public CADRectangle(CADShape copy){
+		
+		super(copy);
+		
+	}
 	
 	
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		super.paint(g);
+		
                 
                 if(IsFilled){
             
@@ -48,7 +54,7 @@ public class CADRectangle extends CADShape{
 		g.setColor(DrawColor);
 		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 
-		
+		super.paint(g);
 	}
     
 }

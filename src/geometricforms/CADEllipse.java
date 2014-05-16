@@ -30,13 +30,18 @@ public class CADEllipse extends CADShape {
 		super(Frame);
 		// TODO Auto-generated constructor stub
 	}
+        
+        public CADEllipse(CADShape copy){
+		
+		super(copy);
+		
+	}
 
 	@Override
 	public void paint(Graphics g) {
 
-		super.paint(g);
-		
 		g.drawOval(0, 0, getWidth()-1, getHeight()-1);
+                super.paint(g);
 	}
     
 }

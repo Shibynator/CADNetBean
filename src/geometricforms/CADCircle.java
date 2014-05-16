@@ -29,14 +29,19 @@ public class CADCircle extends CADShape {
 		super(Frame);
 		// TODO Auto-generated constructor stub
 	}
+        
+        public CADCircle(CADShape copy){
+		
+		super(copy);
+		
+	}
 
 	
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paint(g);
-		
+
 		g.drawArc(0, 0, getWidth()-1, getHeight()-1, 0, 360);
+                super.paint(g);
 	}
 	
 	@Override

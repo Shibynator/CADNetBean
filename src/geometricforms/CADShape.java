@@ -71,6 +71,17 @@ public class CADShape extends JPanel {
         Initialise();
 
     }
+    
+    public CADShape(CADShape copy) {
+
+        setBounds(copy.getBounds().x+10,copy.getBounds().y+10,copy.getBounds().width+10,copy.getBounds().height+10);
+        DrawColor=copy.DrawColor;
+        FillColor=copy.FillColor;
+        IsFilled=copy.IsFilled;
+        
+        Initialise();
+        
+    }
 
     private void Initialise() {
 
@@ -170,13 +181,6 @@ public class CADShape extends JPanel {
         PropertyEvent.removePropertyChangeListener(listener);
     }
 
-//    public void LoadImageApp() {
-//        try {
-//            ResizeIcon = ImageIO.read(new File("Resources\\ResizeIcon.jpg"));
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
-//        }
-//    }
 
     @Override
     public void setBounds(int x, int y, int width, int height) {

@@ -24,12 +24,18 @@ public class CADLine extends CADShape{
         super(Koord);
         
     }
+    
+    public CADLine(CADShape copy){
+		
+		super(copy);
+		
+	}
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        
+         
         g.drawLine(0,0,getBounds().width-1,getBounds().height-1);
+        super.paint(g);
     }
     
     

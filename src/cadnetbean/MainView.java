@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -38,7 +41,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private static final long serialVersionUID = 1L;
     private List<CADShape>GraphicList= new ArrayList<CADShape>();
     private CADShape ShapeStyle;
-    private CADShape get;
+    private CADShape CopyBuffer;
     private Point FirstClick=new Point();
     private boolean Saved = false;
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
@@ -629,21 +632,44 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
                  PaintPanel.remove(item);
-                 GraphicList.remove(item);
+                 
+                 if(GraphicList.size()>1)
+                    GraphicList.remove(item);//TODO: verhält sich noch nicht richtig, letztes gezeichnetes element verursacht exception beim löschvorgang
+                 else
+                    item=null;
             }
         }
         PaintPanel.repaint();
     }//GEN-LAST:event_MenuItemDeletActionPerformed
 
     private void MenuItemPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPasteActionPerformed
-        GraphicList.add(get);
+        
+        try {
+            try {
+                GraphicList.add(CopyBuffer.getClass().getConstructor(CADShape.class).newInstance(CopyBuffer));
+            } catch (InstantiationException ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PaintPanel.add(GraphicList.get(GraphicList.size()-1));
+        GraphicList.get(GraphicList.size()-1).addPropertyChangeListener(ShapePropertyListener);
         PaintPanel.repaint();
     }//GEN-LAST:event_MenuItemPasteActionPerformed
 
     private void MenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCopyActionPerformed
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
-                get = GraphicList.get(GraphicList.indexOf(item));
+                CopyBuffer = item;
             }
         }
     }//GEN-LAST:event_MenuItemCopyActionPerformed
