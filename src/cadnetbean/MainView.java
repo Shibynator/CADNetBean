@@ -620,11 +620,12 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
                  PaintPanel.remove(item);
+                 GraphicList.remove(item);
                  
-                 if(GraphicList.size()>1)
-                    GraphicList.remove(item);//TODO: verhält sich noch nicht richtig, letztes gezeichnetes element verursacht exception beim löschvorgang
-                 else
-                    item=null;
+//                 if(GraphicList.size()>1)
+//                    GraphicList.remove(item);//TODO: verhält sich noch nicht richtig, letztes gezeichnetes element verursacht exception beim löschvorgang
+//                 else
+//                    item=null;
             }
         }
         PaintPanel.repaint();

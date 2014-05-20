@@ -53,7 +53,7 @@ public class CADRectangle extends CADShape{
                 }
 		g.setColor(DrawColor);
 		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
-
+                
 		super.paint(g);
 	}
     
