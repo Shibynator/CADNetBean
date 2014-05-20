@@ -576,18 +576,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         }
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
-    private void PaintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMousePressed
-        FirstClick = evt.getPoint();
-        try {
-            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
-            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
-        } catch (Exception error) {//TODO: Ist vielleicht überflüssig, ->immer mind. eine form angewählt
-            // TODO Auto-generated catch block
-            error.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
-        }
-        PaintPanel.add(GraphicList.get(GraphicList.size()-1));    }//GEN-LAST:event_PaintPanelMousePressed
-
     private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
         if(evt.getX()-FirstClick.x>0&&evt.getY()-FirstClick.y>0)//positiv width and height
             GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, FirstClick.y, evt.getX()-FirstClick.x, evt.getY()-FirstClick.y);				
@@ -673,6 +661,21 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             }
         }
     }//GEN-LAST:event_MenuItemCopyActionPerformed
+
+    private void PaintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMousePressed
+        FirstClick = evt.getPoint();
+        try {
+            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
+            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
+
+        } catch (Exception error) {//TODO: Ist vielleicht überflüssig, ->immer mind. eine form angewählt
+            // TODO Auto-generated catch block
+            error.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
+        }
+        PaintPanel.add(GraphicList.get(GraphicList.size()-1));
+        PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
+    }//GEN-LAST:event_PaintPanelMousePressed
 
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
