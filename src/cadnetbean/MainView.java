@@ -617,17 +617,16 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_MenuItemBackgroundcolorActionPerformed
 
     private void MenuItemDeletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemDeletActionPerformed
+        CADShape DeleteObject=null;
+        
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
                  PaintPanel.remove(item);
-                 GraphicList.remove(item);
-                 
-//                 if(GraphicList.size()>1)
-//                    GraphicList.remove(item);//TODO: verhält sich noch nicht richtig, letztes gezeichnetes element verursacht exception beim löschvorgang
-//                 else
-//                    item=null;
+                 DeleteObject=item;//referenz holen da das object nicht in der schlaufe aus dem array gelöscht werden darf
+
             }
         }
+        GraphicList.remove(DeleteObject);
         PaintPanel.repaint();
     }//GEN-LAST:event_MenuItemDeletActionPerformed
 
