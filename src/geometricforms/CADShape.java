@@ -5,6 +5,8 @@
  */
 package geometricforms;
 
+import cadnetbean.KontextMenu;
+import com.sun.org.apache.regexp.internal.RETest;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -20,8 +22,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
 
 /**
@@ -94,7 +98,16 @@ public class CADShape extends JPanel {
             public void mouseClicked(MouseEvent arg0) {
 
                 setSelected(true);
-
+                
+                if(arg0.getButton() == 3){
+                    KontextMenu Menu = new KontextMenu();
+                    add(Menu);
+                    Menu.show(Menu.test, 0, 0);
+                    //Menu.show(Menu.test, arg0.getX(), arg0.getY());
+                    //Menu.setBounds(50, 50 , 50, 50);
+                    
+                   
+                }
             }
 
             @Override
