@@ -21,6 +21,7 @@ package cadnetbean;
 // Import packages and libraries
 import geometricforms.*;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.print.*;
 import java.beans.PropertyChangeEvent;
@@ -61,7 +62,9 @@ public class MainView extends javax.swing.JFrame implements Serializable{
                                 item.setSelected(false);
                             }
                         }
-                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren    
+                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
+//                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
+                        
                     }
                     else{
                         ((CADShape) sourceObject).setOpaque(false);
@@ -105,6 +108,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         LineColorPanel = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         PaintPanel = new javax.swing.JLayeredPane();
+        LayerToolbar = new javax.swing.JToolBar();
+        MoveToFrontButton = new javax.swing.JButton();
+        LayerUpButton = new javax.swing.JButton();
+        LayerDownButton = new javax.swing.JButton();
+        MoveToBackButton = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
@@ -342,7 +350,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         PaintPanel.setLayout(PaintPanelLayout);
         PaintPanelLayout.setHorizontalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
         PaintPanelLayout.setVerticalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,6 +358,53 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         );
 
         ScrollPane.setViewportView(PaintPanel);
+
+        LayerToolbar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        LayerToolbar.setRollover(true);
+
+        MoveToFrontButton.setText("To Front");
+        MoveToFrontButton.setFocusable(false);
+        MoveToFrontButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        MoveToFrontButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        MoveToFrontButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MoveToFrontButtonActionPerformed(evt);
+            }
+        });
+        LayerToolbar.add(MoveToFrontButton);
+
+        LayerUpButton.setText("Layer Up");
+        LayerUpButton.setFocusable(false);
+        LayerUpButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        LayerUpButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        LayerUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LayerUpButtonActionPerformed(evt);
+            }
+        });
+        LayerToolbar.add(LayerUpButton);
+
+        LayerDownButton.setText("Layer Down");
+        LayerDownButton.setFocusable(false);
+        LayerDownButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        LayerDownButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        LayerDownButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LayerDownButtonActionPerformed(evt);
+            }
+        });
+        LayerToolbar.add(LayerDownButton);
+
+        MoveToBackButton.setText("To Back");
+        MoveToBackButton.setFocusable(false);
+        MoveToBackButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        MoveToBackButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        MoveToBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MoveToBackButtonActionPerformed(evt);
+            }
+        });
+        LayerToolbar.add(MoveToBackButton);
 
         MenuBar.setBackground(java.awt.SystemColor.activeCaption);
         MenuBar.setAlignmentY(0.5F);
@@ -460,15 +515,23 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ScrollPane)
+            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LayerToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LayerToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -635,6 +698,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         try {
             try {
                 GraphicList.add(CopyBuffer.getClass().getConstructor(CADShape.class).newInstance(CopyBuffer));
+                CopyBuffer=GraphicList.get(GraphicList.size()-1);
             } catch (InstantiationException ex) {
                 Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
@@ -676,6 +740,39 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         PaintPanel.add(GraphicList.get(GraphicList.size()-1));
         PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
     }//GEN-LAST:event_PaintPanelMousePressed
+
+    private void MoveToFrontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToFrontButtonActionPerformed
+   
+        for (CADShape item : GraphicList) {
+            
+            if(item.getSelected())
+                PaintPanel.moveToFront((Component)item);
+        }
+    }//GEN-LAST:event_MoveToFrontButtonActionPerformed
+
+    private void MoveToBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToBackButtonActionPerformed
+        for (CADShape item : GraphicList) {
+            
+            if(item.getSelected())
+                PaintPanel.moveToBack((Component)item);
+        }
+    }//GEN-LAST:event_MoveToBackButtonActionPerformed
+
+    private void LayerUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerUpButtonActionPerformed
+        for (CADShape item : GraphicList) {
+            
+            if(item.getSelected())
+                PaintPanel.setLayer(item, PaintPanel.getLayer(item)+1);
+        }
+    }//GEN-LAST:event_LayerUpButtonActionPerformed
+
+    private void LayerDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerDownButtonActionPerformed
+        for (CADShape item : GraphicList) {
+            
+            if(item.getSelected())
+                PaintPanel.setLayer(item, PaintPanel.getLayer(item)-1);
+        }
+    }//GEN-LAST:event_LayerDownButtonActionPerformed
 
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
@@ -725,6 +822,9 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JToggleButton EllipseButton;
     private javax.swing.JButton FillColorButton;
     private javax.swing.JPanel FillColorPanel;
+    private javax.swing.JButton LayerDownButton;
+    private javax.swing.JToolBar LayerToolbar;
+    private javax.swing.JButton LayerUpButton;
     private javax.swing.JToggleButton LineButton;
     private javax.swing.JButton LineColorButton;
     private javax.swing.JPanel LineColorPanel;
@@ -740,6 +840,8 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JMenu MenuView;
+    private javax.swing.JButton MoveToBackButton;
+    private javax.swing.JButton MoveToFrontButton;
     private javax.swing.JLayeredPane PaintPanel;
     private javax.swing.JToggleButton RectangleButton;
     private javax.swing.JPanel ReservePanel;
