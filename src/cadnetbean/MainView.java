@@ -767,11 +767,28 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_LayerUpButtonActionPerformed
 
     private void LayerDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerDownButtonActionPerformed
+        CADShape selecteditem=null;
+        
         for (CADShape item : GraphicList) {
             
             if(item.getSelected())
-                PaintPanel.setLayer(item, PaintPanel.getLayer(item)-1);
+                selecteditem=item;
+//                PaintPanel.setLayer(item, PaintPanel.getLayer(item)-1);
         }
+        
+        if(selecteditem!=null){
+            
+           PaintPanel.setLayer(selecteditem, PaintPanel.getLayer(selecteditem)-1);
+        
+            for (CADShape item : GraphicList) {
+            
+                if(item.getSelected()!=true && PaintPanel.getLayer(selecteditem)==PaintPanel.getLayer(item))
+                    PaintPanel.setLayer(item, PaintPanel.getLayer(item)+1);
+            } 
+            
+        }
+        
+        
     }//GEN-LAST:event_LayerDownButtonActionPerformed
 
     /*
