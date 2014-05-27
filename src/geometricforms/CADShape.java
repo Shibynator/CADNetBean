@@ -173,7 +173,7 @@ public class CADShape extends JPanel {
 
             try {
                 //            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
-                g.drawImage(ImageIO.read(new File("src\\images\\ResizeIcon.jpg")),iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
+                g.drawImage(ImageIO.read(new File("src\\images\\ResizeIcon3.gif")),iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
             } catch (IOException ex) {
                 Logger.getLogger(CADShape.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
