@@ -37,8 +37,8 @@ public class CADShape extends JPanel {
     private static final long serialVersionUID = 1L;
     public Point ClickOffsetPoint = new Point();
     public Color DrawColor = Color.black;
-    public Color FillColor =Color.red;//TODO: Für Testzwecke
-    public boolean IsFilled;
+    public Color FillColor =new Color(255,255,255,0);
+    
     
     protected Boolean Selected = false;
 //    protected BufferedImage ResizeIcon;
@@ -81,7 +81,7 @@ public class CADShape extends JPanel {
         setBounds(copy.getBounds().x+10,copy.getBounds().y+10,copy.getBounds().width+10,copy.getBounds().height+10);
         DrawColor=copy.DrawColor;
         FillColor=copy.FillColor;
-        IsFilled=copy.IsFilled;
+        
         
         Initialise();
         
@@ -166,9 +166,7 @@ public class CADShape extends JPanel {
     public void paint(Graphics g) {
 
         super.paint(g);
-        
-//        g.setColor(DrawColor);
-        
+             
         if (getSelected() == true) {
 
             try {
@@ -178,7 +176,6 @@ public class CADShape extends JPanel {
                 Logger.getLogger(CADShape.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
             }
-//             g.drawImage(ResizeIcon,iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
         }
     }
 

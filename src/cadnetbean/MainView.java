@@ -276,6 +276,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         FillColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         FillColorPanel.setMaximumSize(new java.awt.Dimension(40, 40));
         FillColorPanel.setMinimumSize(new java.awt.Dimension(40, 40));
+        FillColorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FillColorPanelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout FillColorPanelLayout = new javax.swing.GroupLayout(FillColorPanel);
         FillColorPanel.setLayout(FillColorPanelLayout);
@@ -602,7 +607,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
-                 item.IsFilled=true;
                  item.FillColor = JColorChooser.showDialog(this, null, item.FillColor);
                  FillColorPanel.setBackground(item.FillColor);
             }
@@ -746,6 +750,15 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         }
             
     }//GEN-LAST:event_LayerDownButtonActionPerformed
+
+    private void FillColorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FillColorPanelMouseClicked
+        for (CADShape item : GraphicList) {
+            
+            if(item.getSelected())
+                item.FillColor=FillColorPanel.getBackground();
+
+        }
+    }//GEN-LAST:event_FillColorPanelMouseClicked
 
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
