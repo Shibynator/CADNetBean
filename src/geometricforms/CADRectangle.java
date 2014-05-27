@@ -48,6 +48,7 @@ public class CADRectangle extends CADShape{
                 g.fillRect(0, 0, getWidth()-1, getHeight()-1);
             
                 
+                
 		g.setColor(DrawColor);
 		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
                 
