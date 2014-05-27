@@ -334,6 +334,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         ScrollPane.setAutoscrolls(true);
 
         PaintPanel.setBackground(java.awt.Color.white);
+        PaintPanel.setOpaque(true);
         PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PaintPanelMouseClicked(evt);
@@ -607,8 +608,9 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
         for (CADShape item : GraphicList) {
             if(item.getSelected()){
-                 item.FillColor = JColorChooser.showDialog(this, null, item.FillColor);
-                 FillColorPanel.setBackground(item.FillColor);
+                item.FillColor = FillColorPanel.getBackground();
+                 //item.FillColor = JColorChooser.showDialog(this, null, item.FillColor);
+                 //FillColorPanel.setBackground(item.FillColor);
             }
         }
     }//GEN-LAST:event_FillColorButtonActionPerformed
@@ -646,12 +648,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             }
         }
     }//GEN-LAST:event_LineColorButtonActionPerformed
-
-    private void MenuItemBackgroundcolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemBackgroundcolorActionPerformed
-        Color CC = JColorChooser.showDialog(this, null, PaintPanel.getBackground());
-        PaintPanel.setBackground(CC);
-        ScrollPane.setBackground(CC);
-    }//GEN-LAST:event_MenuItemBackgroundcolorActionPerformed
 
     private void MenuItemDeletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemDeletActionPerformed
         CADShape DeleteObject=null;
@@ -752,13 +748,18 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_LayerDownButtonActionPerformed
 
     private void FillColorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FillColorPanelMouseClicked
-        for (CADShape item : GraphicList) {
-            
-            if(item.getSelected())
-                item.FillColor=FillColorPanel.getBackground();
+        //for (CADShape item : GraphicList) {
+            FillColorPanel.setBackground(JColorChooser.showDialog(this, null, Color.WHITE));
+            //if(item.getSelected())
+                //item.FillColor=FillColorPanel.getBackground();
 
-        }
+        //}
     }//GEN-LAST:event_FillColorPanelMouseClicked
+
+    private void MenuItemBackgroundcolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemBackgroundcolorActionPerformed
+        Color CC = JColorChooser.showDialog(this, null, PaintPanel.getBackground());
+        PaintPanel.setBackground(CC);
+    }//GEN-LAST:event_MenuItemBackgroundcolorActionPerformed
 
     /*
     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
