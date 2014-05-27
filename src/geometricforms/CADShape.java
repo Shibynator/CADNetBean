@@ -8,6 +8,7 @@ package geometricforms;
 import cadnetbean.KontextMenu;
 import com.sun.org.apache.regexp.internal.RETest;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -95,7 +96,7 @@ public class CADShape extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent arg0) {
+            public void mouseClicked(MouseEvent arg0) {//TODO: Kann wahrscheinlich wieder gelöscht werden
 
                 setSelected(true);
                 
@@ -125,6 +126,8 @@ public class CADShape extends JPanel {
                     setOpaque(true);
                     setBackground(Color.lightGray);
                 }
+                
+                setCursor(new Cursor(Cursor.MOVE_CURSOR));
             }
 
             @Override
