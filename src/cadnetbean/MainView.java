@@ -761,34 +761,20 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private void LayerUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerUpButtonActionPerformed
         for (CADShape item : GraphicList) {
             
-            if(item.getSelected())
-                PaintPanel.setLayer(item, PaintPanel.getLayer(item)+1);
+            if(item.getSelected()&&PaintPanel.getPosition(item)>0)//wenn position = 0 dann darf nicht nochmal dekrementiert werden, da position = -1 => movetoback()
+                PaintPanel.setPosition(item, PaintPanel.getPosition(item)-1);
         }
     }//GEN-LAST:event_LayerUpButtonActionPerformed
 
     private void LayerDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerDownButtonActionPerformed
-        CADShape selecteditem=null;
-        
+       
         for (CADShape item : GraphicList) {
             
             if(item.getSelected())
-                selecteditem=item;
-//                PaintPanel.setLayer(item, PaintPanel.getLayer(item)-1);
+                PaintPanel.setPosition(item, PaintPanel.getPosition(item)+1);
+
         }
-        
-        if(selecteditem!=null){
             
-           PaintPanel.setLayer(selecteditem, PaintPanel.getLayer(selecteditem)-1);
-        
-            for (CADShape item : GraphicList) {
-            
-                if(item.getSelected()!=true && PaintPanel.getLayer(selecteditem)==PaintPanel.getLayer(item))
-                    PaintPanel.setLayer(item, PaintPanel.getLayer(item)+1);
-            } 
-            
-        }
-        
-        
     }//GEN-LAST:event_LayerDownButtonActionPerformed
 
     /*
