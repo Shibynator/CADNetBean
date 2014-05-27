@@ -117,7 +117,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
         MenuItemSave = new javax.swing.JMenuItem();
-        MenuItemPrint = new javax.swing.JMenuItem();
         MenuItemClose = new javax.swing.JMenuItem();
         MenuEdit = new javax.swing.JMenu();
         MenuItemCopy = new javax.swing.JMenuItem();
@@ -125,7 +124,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuItemDelet = new javax.swing.JMenuItem();
         MenuView = new javax.swing.JMenu();
         CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
-        CheckBoxGrid = new javax.swing.JCheckBoxMenuItem();
         MenuItemBackgroundcolor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,7 +139,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         ToolBar.setPreferredSize(new java.awt.Dimension(142, 42));
 
         ToolBarButtons.add(LineButton);
-        LineButton.setText("L");
+        LineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LineIcon.gif"))); // NOI18N
         LineButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         LineButton.setFocusable(false);
         LineButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -149,7 +147,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         LineButton.setMaximumSize(new java.awt.Dimension(40, 40));
         LineButton.setMinimumSize(new java.awt.Dimension(20, 20));
         LineButton.setPreferredSize(new java.awt.Dimension(40, 40));
-        LineButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         LineButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LineButtonMouseClicked(evt);
@@ -429,15 +426,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         });
         MenuFile.add(MenuItemSave);
 
-        MenuItemPrint.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        MenuItemPrint.setText("print");
-        MenuItemPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemPrintActionPerformed(evt);
-            }
-        });
-        MenuFile.add(MenuItemPrint);
-
         MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemClose.setText("close");
         MenuItemClose.addActionListener(new java.awt.event.ActionListener() {
@@ -470,7 +458,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuEdit.add(MenuItemPaste);
 
         MenuItemDelet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
-        MenuItemDelet.setText("delet");
+        MenuItemDelet.setText("delete");
         MenuItemDelet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemDeletActionPerformed(evt);
@@ -490,14 +478,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             }
         });
         MenuView.add(CheckBoxToolBar);
-
-        CheckBoxGrid.setText("Grid");
-        CheckBoxGrid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxGridActionPerformed(evt);
-            }
-        });
-        MenuView.add(CheckBoxGrid);
 
         MenuItemBackgroundcolor.setText("set Backgroundcolor");
         MenuItemBackgroundcolor.addActionListener(new java.awt.event.ActionListener() {
@@ -536,12 +516,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void MenuItemPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPrintActionPerformed
-        if (evt.getActionCommand().equals("print") == true) {
-            
-        }
-    }//GEN-LAST:event_MenuItemPrintActionPerformed
 
     private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
         if (evt.getActionCommand().equals("open") == true) {
@@ -588,10 +562,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             ToolBar.setVisible(false);
         }
     }//GEN-LAST:event_CheckBoxToolBarActionPerformed
-
-    private void CheckBoxGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxGridActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxGridActionPerformed
 
     private void ArrowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArrowButtonMouseClicked
         // TODO add your handling code here:
@@ -819,7 +789,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton ArrowButton;
-    private javax.swing.JCheckBoxMenuItem CheckBoxGrid;
     private javax.swing.JCheckBoxMenuItem CheckBoxToolBar;
     private javax.swing.JToggleButton CircleButton;
     private javax.swing.JToggleButton EllipseButton;
@@ -840,7 +809,6 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JMenuItem MenuItemDelet;
     private javax.swing.JMenuItem MenuItemOpen;
     private javax.swing.JMenuItem MenuItemPaste;
-    private javax.swing.JMenuItem MenuItemPrint;
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JMenu MenuView;
     private javax.swing.JButton MoveToBackButton;
