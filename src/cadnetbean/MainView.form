@@ -435,7 +435,7 @@
         <Container class="javax.swing.JPanel" name="FillColorPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -539,7 +539,7 @@
         <Container class="javax.swing.JLayeredPane" name="PaintPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>

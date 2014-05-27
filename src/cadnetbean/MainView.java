@@ -272,7 +272,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         });
         ToolBar.add(FillColorButton);
 
-        FillColorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        FillColorPanel.setBackground(java.awt.Color.white);
         FillColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         FillColorPanel.setMaximumSize(new java.awt.Dimension(40, 40));
         FillColorPanel.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -333,7 +333,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ScrollPane.setAutoscrolls(true);
 
-        PaintPanel.setBackground(java.awt.Color.white);
+        PaintPanel.setBackground(java.awt.Color.lightGray);
         PaintPanel.setOpaque(true);
         PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
