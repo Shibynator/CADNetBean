@@ -43,14 +43,11 @@ public class CADRectangle extends CADShape{
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		
+
+                g.setColor(FillColor);
+                g.fillRect(0, 0, getWidth()-1, getHeight()-1);
+            
                 
-                if(IsFilled){
-            
-                    g.setColor(FillColor);
-                    g.fillRect(0, 0, getWidth()-1, getHeight()-1);
-            
-                }
 		g.setColor(DrawColor);
 		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
                 
