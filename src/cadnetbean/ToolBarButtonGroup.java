@@ -28,6 +28,7 @@ public class ToolBarButtonGroup extends javax.swing.ButtonGroup {
             super.setSelected(model, selected);
         } else {
             clearSelection();
+            //super.setSelected(model, selected);
         }
     }
 }
