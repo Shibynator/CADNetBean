@@ -41,7 +41,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     // Attributs
     private static final long serialVersionUID = 1L;
     private List<CADShape> GraphicList = new ArrayList<CADShape>();
-    private CADShape ShapeStyle;
+    private CADShape ShapeStyle = new CADLine();
     private CADShape CopyBuffer;
     private Point FirstClick = new Point();
     public static boolean Saved = false;
@@ -142,6 +142,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
 
         ToolBarButtons.add(LineButton);
         LineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LineIcon.gif"))); // NOI18N
+        LineButton.setSelected(true);
         LineButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         LineButton.setFocusable(false);
         LineButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
