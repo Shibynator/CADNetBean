@@ -131,6 +131,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         setBackground(java.awt.SystemColor.activeCaption);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("MainView"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(650, 500));
 
         ToolBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ToolBar.setRollover(true);
@@ -394,10 +395,10 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         });
         ToolBar.add(MoveToBackButton);
 
-        ScrollPane.setAutoscrolls(true);
         ScrollPane.setFocusable(false);
         ScrollPane.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        ScrollPane.setPreferredSize(new java.awt.Dimension(500, 300));
+        ScrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
+        ScrollPane.setWheelScrollingEnabled(false);
 
         PaintPanel.setBackground(java.awt.Color.lightGray);
         PaintPanel.setInputVerifier(PaintPanel.getInputVerifier());
@@ -531,10 +532,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(ScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
