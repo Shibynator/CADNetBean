@@ -5,7 +5,6 @@
  */
 package geometricforms;
 
-import cadnetbean.KontextMenu;
 import com.sun.org.apache.regexp.internal.RETest;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -114,12 +113,12 @@ public abstract class CADShape extends JPanel {
                 setSelected(true);
                 
                 if(arg0.getButton() == 3){
-                    KontextMenu Menu = new KontextMenu();
+                /*    KontextMenu Menu = new KontextMenu();
                     add(Menu);
                     Menu.show(Menu.test, 0, 0);
                     //Menu.show(Menu.test, arg0.getX(), arg0.getY());
                     //Menu.setBounds(50, 50 , 50, 50);
-                    
+                */   
                    
                 }
             }
