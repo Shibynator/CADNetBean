@@ -7,11 +7,15 @@ package geometricforms;
 
 import cadnetbean.KontextMenu;
 import com.sun.org.apache.regexp.internal.RETest;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -28,17 +32,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
+import sun.java2d.pipe.ShapeDrawPipe;
 
 /**
  *
  * @author Daxx
  */
-public class CADShape extends JPanel {
+public abstract class CADShape extends JPanel {
 
     private static final long serialVersionUID = 1L;
     public Point ClickOffsetPoint = new Point();
     public Color DrawColor = Color.black;
     public Color FillColor =new Color(255,255,255,0);
+    public float LineThickness =40f;
     
     
     protected Boolean Selected = false;
@@ -57,7 +63,10 @@ public class CADShape extends JPanel {
 
     }
 
-    public int LayerLevel = 0;
+    protected Shape ShapeStyle;
+    
+    public abstract Shape getShapeStyle();
+    public abstract void setShapeStyle(Shape value);
 
     private PropertyChangeSupport PropertyEvent = new PropertyChangeSupport(this);
 
@@ -87,13 +96,17 @@ public class CADShape extends JPanel {
         Initialise();
         
     }
+    
+    abstract void InitShapeStyle();
 
-    private void Initialise() {
+    private  void Initialise() {
 
+        InitShapeStyle();
+        
         setOpaque(false);
 //        LoadImageApp();
         
-
+        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {//TODO: Kann wahrscheinlich wieder gelöscht werden
@@ -169,7 +182,17 @@ public class CADShape extends JPanel {
     public void paint(Graphics g) {
 
         super.paint(g);
-             
+        
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(FillColor);
+            g2.fill(getShapeStyle());
+            
+            g2.setStroke(new BasicStroke(LineThickness));
+            g2.setColor(DrawColor);
+            g2.draw(getShapeStyle());
+        
+        
+        
         if (getSelected() == true) {
 
             try {
@@ -180,6 +203,8 @@ public class CADShape extends JPanel {
                 JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
             }
         }
+        
+        
     }
 
     @Override

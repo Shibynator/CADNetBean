@@ -9,6 +9,9 @@ package geometricforms;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -37,11 +40,21 @@ public class CADEllipse extends CADShape {
 		
 	}
 
-	@Override
-	public void paint(Graphics g) {
 
-		g.drawOval(0, 0, getWidth()-1, getHeight()-1);
-                super.paint(g);
-	}
+    @Override
+    public Shape getShapeStyle() {
+        ((Arc2D)ShapeStyle).setArc(0.5*LineThickness, 0.5*LineThickness, getWidth()-LineThickness, getHeight()-LineThickness, 0, 360, 1);
+        return ShapeStyle;
+    }
+
+    @Override
+    public void setShapeStyle(Shape value) {
+        ShapeStyle=value;
+    }
+
+    @Override
+    void InitShapeStyle() {
+        ShapeStyle=new Arc2D.Float();
+    }
     
 }

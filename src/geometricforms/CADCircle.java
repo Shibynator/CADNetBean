@@ -7,14 +7,18 @@
 package geometricforms;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author Daxx
  */
-public class CADCircle extends CADShape {
+public class CADCircle extends CADEllipse {
     
     public CADCircle() {
 		// TODO Auto-generated constructor stub
@@ -38,16 +42,11 @@ public class CADCircle extends CADShape {
 
 	
 	@Override
-	public void paint(Graphics g) {
-
-		g.drawArc(0, 0, getWidth()-1, getHeight()-1, 0, 360);
-                super.paint(g);
-	}
-	
-	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		// TODO Auto-generated method stub
 		super.setBounds(x, y, height, height);
 	}
+
+    
     
 }
