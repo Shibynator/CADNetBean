@@ -1,7 +1,7 @@
 /**
  * *****************************************************************************
  * Class:	MainView.java
- * ******************************************************************************
+ * *****************************************************************************
  * Company:	Berner Fachhochschule für Technik und Informatik
  *
  * Author:	Feuz Bruno (FB)
@@ -13,7 +13,7 @@
  * Describtion:	Defines the Mainframe-Designe of the CAD.
  *
  * Revision:	0.0	file created 0.1 modified	FB 06.05.2014
- *****************************************************************************
+ * ******************************************************************************
  */
 // Package definition
 package cadnetbean;
@@ -83,6 +83,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
+        initToolTipText();
     }
 
     /**
@@ -100,12 +101,12 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         SquareButton = new javax.swing.JToggleButton();
         EllipseButton = new javax.swing.JToggleButton();
         CircleButton = new javax.swing.JToggleButton();
-        ReservePanel = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         FillColorButton = new javax.swing.JButton();
         FillColorPanel = new javax.swing.JPanel();
         LineColorButton = new javax.swing.JButton();
         LineColorPanel = new javax.swing.JPanel();
-        ReservePanel1 = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         MoveToFrontButton = new javax.swing.JButton();
         LayerUpButton = new javax.swing.JButton();
         LayerDownButton = new javax.swing.JButton();
@@ -224,23 +225,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             }
         });
         ToolBar.add(CircleButton);
-
-        ReservePanel.setMaximumSize(new java.awt.Dimension(40, 40));
-        ReservePanel.setMinimumSize(new java.awt.Dimension(40, 40));
-        ReservePanel.setPreferredSize(new java.awt.Dimension(40, 40));
-
-        javax.swing.GroupLayout ReservePanelLayout = new javax.swing.GroupLayout(ReservePanel);
-        ReservePanel.setLayout(ReservePanelLayout);
-        ReservePanelLayout.setHorizontalGroup(
-            ReservePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        ReservePanelLayout.setVerticalGroup(
-            ReservePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        ToolBar.add(ReservePanel);
+        ToolBar.add(jSeparator1);
 
         FillColorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconFill.gif"))); // NOI18N
         FillColorButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -319,22 +304,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         );
 
         ToolBar.add(LineColorPanel);
-
-        ReservePanel1.setMaximumSize(new java.awt.Dimension(40, 40));
-        ReservePanel1.setMinimumSize(new java.awt.Dimension(40, 40));
-
-        javax.swing.GroupLayout ReservePanel1Layout = new javax.swing.GroupLayout(ReservePanel1);
-        ReservePanel1.setLayout(ReservePanel1Layout);
-        ReservePanel1Layout.setHorizontalGroup(
-            ReservePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        ReservePanel1Layout.setVerticalGroup(
-            ReservePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        ToolBar.add(ReservePanel1);
+        ToolBar.add(jSeparator2);
 
         MoveToFrontButton.setFocusable(false);
         MoveToFrontButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -546,6 +516,22 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initToolTipText() {
+        LineButton.setToolTipText("Line");
+        CircleButton.setToolTipText("Circle");
+        RectangleButton.setToolTipText("Rectangle");
+        SquareButton.setToolTipText("Square");
+        EllipseButton.setToolTipText("Ellipse");
+        FillColorButton.setToolTipText("Fillcolor");
+        FillColorPanel.setToolTipText("Choose fillcolor");
+        LineColorButton.setToolTipText("Linecolor");
+        LineColorPanel.setToolTipText("choose linecolor");
+        MoveToBackButton.setToolTipText("to background");
+        MoveToFrontButton.setToolTipText("to forground");
+        LayerDownButton.setToolTipText("layer down");
+        LayerUpButton.setToolTipText("layer up");
+    }
+
     // Action Listener für Menü Knöpfe
     private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
         if (evt.getActionCommand().equals("open") == true) {
@@ -558,7 +544,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             SaveLoad.savefile(GraphicList, false);
         }
     }//GEN-LAST:event_MenuItemSaveActionPerformed
-   
+
     private void CheckBoxToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxToolBarActionPerformed
         if (CheckBoxToolBar.isSelected() == true) {
             ToolBar.setVisible(true);
@@ -859,10 +845,10 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private javax.swing.JButton MoveToFrontButton;
     private javax.swing.JLayeredPane PaintPanel;
     private javax.swing.JToggleButton RectangleButton;
-    private javax.swing.JPanel ReservePanel;
-    private javax.swing.JPanel ReservePanel1;
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JToggleButton SquareButton;
     private javax.swing.JToolBar ToolBar;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
