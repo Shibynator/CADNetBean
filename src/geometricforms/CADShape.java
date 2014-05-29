@@ -99,7 +99,7 @@ public abstract class CADShape extends JPanel {
     
     abstract void InitShapeStyle();
 
-    private  void Initialise() {
+    public  void Initialise() {
 
         InitShapeStyle();
         

@@ -1,20 +1,20 @@
-/*******************************************************************************
+/**
+ * *****************************************************************************
  * Class:	MainView.java
- *******************************************************************************
+ * ******************************************************************************
  * Company:	Berner Fachhochschule für Technik und Informatik
- * 
+ *
  * Author:	Feuz Bruno (FB)
- * 
- * Datum:       06.05.2014
- * 
+ *
+ * Datum: 06.05.2014
+ *
  * Project:	CADNetBean
- * 
+ *
  * Describtion:	Defines the Mainframe-Designe of the CAD.
  *
- * Revision:	0.0	file created
- *              0.1     modified	FB  06.05.2014
- ******************************************************************************/
-
+ * Revision:	0.0	file created 0.1 modified	FB 06.05.2014
+ *****************************************************************************
+ */
 // Package definition
 package cadnetbean;
 
@@ -36,54 +36,52 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class MainView extends javax.swing.JFrame implements Serializable{
- 
+public class MainView extends javax.swing.JFrame implements Serializable {
+
     // Attributs
     private static final long serialVersionUID = 1L;
-    private List<CADShape>GraphicList= new ArrayList<CADShape>();
+    private List<CADShape> GraphicList = new ArrayList<CADShape>();
     private CADShape ShapeStyle;
     private CADShape CopyBuffer;
-    private Point FirstClick=new Point();
-    private boolean Saved = false;
+    private Point FirstClick = new Point();
+    public static boolean Saved = false;
+    public static boolean Save = true;
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
-    SaveLoad Save = new SaveLoad();
-    
+    SaveLoad SaveLoad = new SaveLoad();
+
     private PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent arg0) {
             Object sourceObject = arg0.getSource();
-            
 
             if (sourceObject instanceof CADShape) {
 
                 if (arg0.getPropertyName().equals("Selected")) {
 
-                    if((Boolean)arg0.getNewValue()!=false){
-                        
+                    if ((Boolean) arg0.getNewValue() != false) {
+
                         for (CADShape item : GraphicList) {
-                            if(item!=sourceObject){
+                            if (item != sourceObject) {
                                 item.setSelected(false);
                             }
                         }
                         ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
 //                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
-                        
-                    }
-                    else{
+
+                    } else {
                         ((CADShape) sourceObject).setOpaque(false);
                         ((CADShape) sourceObject).setBackground(Color.white);
                     }
-                        
-                    
-                    }
+
                 }
             }
-        };
-    
+        }
+    };
+
     // Creates Frame of MainView
     public MainView() {
-	setBounds(100, 100, 500, 400); // Minimale Fenstergrösse
+        setBounds(100, 100, 500, 400); // Minimale Fenstergrösse
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
-	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
     }
 
@@ -118,6 +116,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
         MenuItemSave = new javax.swing.JMenuItem();
+        MenuItemSaveAs = new javax.swing.JMenuItem();
         MenuItemClose = new javax.swing.JMenuItem();
         MenuEdit = new javax.swing.JMenu();
         MenuItemCopy = new javax.swing.JMenuItem();
@@ -395,11 +394,13 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         });
         ToolBar.add(MoveToBackButton);
 
-        ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ScrollPane.setAutoscrolls(true);
+        ScrollPane.setFocusable(false);
+        ScrollPane.setMaximumSize(new java.awt.Dimension(1000, 1000));
+        ScrollPane.setPreferredSize(new java.awt.Dimension(500, 300));
 
         PaintPanel.setBackground(java.awt.Color.lightGray);
+        PaintPanel.setInputVerifier(PaintPanel.getInputVerifier());
         PaintPanel.setOpaque(true);
         PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -419,11 +420,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         PaintPanel.setLayout(PaintPanelLayout);
         PaintPanelLayout.setHorizontalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGap(0, Short.MAX_VALUE, Short.MAX_VALUE)
         );
         PaintPanelLayout.setVerticalGroup(
             PaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, Short.MAX_VALUE, Short.MAX_VALUE)
         );
 
         ScrollPane.setViewportView(PaintPanel);
@@ -450,6 +451,15 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             }
         });
         MenuFile.add(MenuItemSave);
+
+        MenuItemSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemSaveAs.setText("save as....");
+        MenuItemSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemSaveAsActionPerformed(evt);
+            }
+        });
+        MenuFile.add(MenuItemSaveAs);
 
         MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemClose.setText("close");
@@ -520,34 +530,38 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane)
-            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Action Listener für Menü Knöpfe
     private void MenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemOpenActionPerformed
         if (evt.getActionCommand().equals("open") == true) {
             loadfile();
-        }          
+        }
     }//GEN-LAST:event_MenuItemOpenActionPerformed
 
     private void MenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveActionPerformed
         if (evt.getActionCommand().equals("save") == true) {
-            Save.savefile(GraphicList, Saved); 
+            SaveLoad.savefile(GraphicList, false);
         }
     }//GEN-LAST:event_MenuItemSaveActionPerformed
-
+   
     private void CheckBoxToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxToolBarActionPerformed
-        if(CheckBoxToolBar.isSelected()==true){
+        if (CheckBoxToolBar.isSelected() == true) {
             ToolBar.setVisible(true);
         } else {
             ToolBar.setVisible(false);
@@ -555,39 +569,42 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_CheckBoxToolBarActionPerformed
 
     private void LineButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LineButtonMouseClicked
-        ShapeStyle=new CADLine();
-        
+        ShapeStyle = new CADLine();
+        Save = false;
     }//GEN-LAST:event_LineButtonMouseClicked
 
     private void RectangleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RectangleButtonMouseClicked
-        ShapeStyle=new CADRectangle();
+        ShapeStyle = new CADRectangle();
+        Save = false;
     }//GEN-LAST:event_RectangleButtonMouseClicked
 
     private void SquareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SquareButtonMouseClicked
-        ShapeStyle=new CADSquare();
+        ShapeStyle = new CADSquare();
+        Save = false;
     }//GEN-LAST:event_SquareButtonMouseClicked
 
     private void EllipseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EllipseButtonMouseClicked
-        ShapeStyle=new CADEllipse();
+        ShapeStyle = new CADEllipse();
+        Save = false;
     }//GEN-LAST:event_EllipseButtonMouseClicked
 
     private void CircleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CircleButtonMouseClicked
-        ShapeStyle=new CADCircle();
+        ShapeStyle = new CADCircle();
+        Save = false;
     }//GEN-LAST:event_CircleButtonMouseClicked
 
     private void MenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCloseActionPerformed
         if (evt.getActionCommand().equals("close") == true) {
-            if(Saved == true){
-              System.exit(0);  
-            }
-            else{
-               //JOptionPane.showMessageDialog(null, "Datei ist nicht gespeichert", "File not saved", JOptionPane.QUESTION_MESSAGE);
+            if (Save == true) {
+                System.exit(0);
+            } else {
+                //JOptionPane.showMessageDialog(null, "Datei ist nicht gespeichert", "File not saved", JOptionPane.QUESTION_MESSAGE);
                 SaveDialogOnClose Warnung = new SaveDialogOnClose();
-                if(Warnung.Option == JOptionPane.CANCEL_OPTION){
+                if (Warnung.Option == JOptionPane.NO_OPTION) {
                     System.exit(0);
                 }
-                if(Warnung.Option == JOptionPane.OK_OPTION){
-                    Save.savefile(GraphicList, Saved); 
+                if (Warnung.Option == JOptionPane.YES_OPTION) {
+                    SaveLoad.savefile(GraphicList, false);
                 }
             }
         }
@@ -595,26 +612,29 @@ public class MainView extends javax.swing.JFrame implements Serializable{
 
     private void FillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillColorButtonActionPerformed
         for (CADShape item : GraphicList) {
-            if(item.getSelected()){
-                item.FillColor = FillColorPanel.getBackground();                 
+            if (item.getSelected()) {
+                item.FillColor = FillColorPanel.getBackground();
+                Save = false;
             }
         }
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
     private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
-        if(evt.getX()-FirstClick.x>0&&evt.getY()-FirstClick.y>0)//positiv width and height
-            GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, FirstClick.y, evt.getX()-FirstClick.x, evt.getY()-FirstClick.y);				
-        
-        else if(evt.getX()-FirstClick.x<0&&evt.getY()-FirstClick.y>0)//negativ width and positiv height
-            GraphicList.get(GraphicList.size()-1).setBounds(evt.getX(), FirstClick.y, FirstClick.x-evt.getX(), evt.getY()-FirstClick.y);	
-        
-        else if(evt.getX()-FirstClick.x>0&&evt.getY()-FirstClick.y<0)//positiv width and negativ height
-            GraphicList.get(GraphicList.size()-1).setBounds(FirstClick.x, evt.getY(), evt.getX()-FirstClick.x, FirstClick.y-evt.getY());
-        
-        else if(evt.getX()-FirstClick.x<0&&evt.getY()-FirstClick.y<0)//negativ width and negativ height
-            GraphicList.get(GraphicList.size()-1).setBounds(evt.getX(), evt.getY(), FirstClick.x-evt.getX(), FirstClick.y-evt.getY());
-        
-	GraphicList.get(GraphicList.size()-1).repaint();
+        if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
+        {
+            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
+        } else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
+        {
+            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
+        } else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
+        {
+            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
+        } else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
+        {
+            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
+        }
+
+        GraphicList.get(GraphicList.size() - 1).repaint();
     }//GEN-LAST:event_PaintPanelMouseDragged
 
     private void PaintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseClicked
@@ -628,19 +648,20 @@ public class MainView extends javax.swing.JFrame implements Serializable{
 
     private void LineColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineColorButtonActionPerformed
         for (CADShape item : GraphicList) {
-            if(item.getSelected()){
+            if (item.getSelected()) {
                 item.DrawColor = LineColorPanel.getBackground();
+                Save = false;
             }
         }
     }//GEN-LAST:event_LineColorButtonActionPerformed
 
     private void MenuItemDeletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemDeletActionPerformed
-        CADShape DeleteObject=null;
-        
+        CADShape DeleteObject = null;
+
         for (CADShape item : GraphicList) {
-            if(item.getSelected()){
-                 PaintPanel.remove(item);
-                 DeleteObject=item;//referenz holen da das object nicht in der schlaufe aus dem array gelöscht werden darf
+            if (item.getSelected()) {
+                PaintPanel.remove(item);
+                DeleteObject = item;//referenz holen da das object nicht in der schlaufe aus dem array gelöscht werden darf
 
             }
         }
@@ -649,11 +670,11 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_MenuItemDeletActionPerformed
 
     private void MenuItemPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPasteActionPerformed
-        
+
         try {
             try {
                 GraphicList.add(CopyBuffer.getClass().getConstructor(CADShape.class).newInstance(CopyBuffer));
-                CopyBuffer=GraphicList.get(GraphicList.size()-1);
+                CopyBuffer = GraphicList.get(GraphicList.size() - 1);
             } catch (InstantiationException ex) {
                 Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
@@ -668,14 +689,14 @@ public class MainView extends javax.swing.JFrame implements Serializable{
         } catch (SecurityException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PaintPanel.add(GraphicList.get(GraphicList.size()-1));
-        GraphicList.get(GraphicList.size()-1).addPropertyChangeListener(ShapePropertyListener);
+        PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
+        GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
         PaintPanel.repaint();
     }//GEN-LAST:event_MenuItemPasteActionPerformed
 
     private void MenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCopyActionPerformed
         for (CADShape item : GraphicList) {
-            if(item.getSelected()){
+            if (item.getSelected()) {
                 CopyBuffer = item;
             }
         }
@@ -692,51 +713,58 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             error.printStackTrace();
             JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
         }
-        PaintPanel.add(GraphicList.get(GraphicList.size()-1));
+        PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
         PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
     }//GEN-LAST:event_PaintPanelMousePressed
 
     private void MoveToFrontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToFrontButtonActionPerformed
-   
+
         for (CADShape item : GraphicList) {
-            
-            if(item.getSelected())
-                PaintPanel.moveToFront((Component)item);
+
+            if (item.getSelected()) {
+                PaintPanel.moveToFront((Component) item);
+            }
         }
     }//GEN-LAST:event_MoveToFrontButtonActionPerformed
 
     private void MoveToBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToBackButtonActionPerformed
         for (CADShape item : GraphicList) {
-            
-            if(item.getSelected())
-                PaintPanel.moveToBack((Component)item);
+
+            if (item.getSelected()) {
+                PaintPanel.moveToBack((Component) item);
+            }
         }
     }//GEN-LAST:event_MoveToBackButtonActionPerformed
 
     private void LayerUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerUpButtonActionPerformed
         for (CADShape item : GraphicList) {
-            
-            if(item.getSelected()&&PaintPanel.getPosition(item)>0)//wenn position = 0 dann darf nicht nochmal dekrementiert werden, da position = -1 => movetoback()
-                PaintPanel.setPosition(item, PaintPanel.getPosition(item)-1);
+
+            if (item.getSelected() && PaintPanel.getPosition(item) > 0)//wenn position = 0 dann darf nicht nochmal dekrementiert werden, da position = -1 => movetoback()
+            {
+                PaintPanel.setPosition(item, PaintPanel.getPosition(item) - 1);
+            }
         }
     }//GEN-LAST:event_LayerUpButtonActionPerformed
 
     private void LayerDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerDownButtonActionPerformed
-       
+
         for (CADShape item : GraphicList) {
-            
-            if(item.getSelected())
-                PaintPanel.setPosition(item, PaintPanel.getPosition(item)+1);
+
+            if (item.getSelected()) {
+                PaintPanel.setPosition(item, PaintPanel.getPosition(item) + 1);
+            }
 
         }
-            
+
     }//GEN-LAST:event_LayerDownButtonActionPerformed
 
     private void FillColorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FillColorPanelMouseClicked
         FillColorPanel.setBackground(JColorChooser.showDialog(this, null, Color.WHITE));
         for (CADShape item : GraphicList) {
-            if(item.getSelected())
-                item.FillColor=FillColorPanel.getBackground();
+            if (item.getSelected()) {
+                item.FillColor = FillColorPanel.getBackground();
+                Save = false;
+            }
         }
     }//GEN-LAST:event_FillColorPanelMouseClicked
 
@@ -748,14 +776,20 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private void LineColorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LineColorPanelMouseClicked
         LineColorPanel.setBackground(JColorChooser.showDialog(this, null, Color.WHITE));
         for (CADShape item : GraphicList) {
-            if(item.getSelected())
-                item.DrawColor=LineColorPanel.getBackground();
+            if (item.getSelected()) {
+                item.DrawColor = LineColorPanel.getBackground();
+                Save = false;
+            }
         }
     }//GEN-LAST:event_LineColorPanelMouseClicked
 
+    private void MenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveAsActionPerformed
+        SaveLoad.savefile(GraphicList, true);
+    }//GEN-LAST:event_MenuItemSaveAsActionPerformed
+
     /*
-    * Methode um Files zu öffnen und laden
-    */
+     * Methode um Files zu öffnen und laden
+     */
     public void loadfile() {
         JFileChooser OPEN = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".cad files", "cad");
@@ -773,31 +807,32 @@ public class MainView extends javax.swing.JFrame implements Serializable{
             JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden", "File not found", JOptionPane.OK_CANCEL_OPTION);
         }
     }
-    
+
     /*
-    * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
-    */
-    @SuppressWarnings("unchecked") 
-    public void loadFromFile(String filename)throws IOException, ClassNotFoundException{
+     * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
+     */
+    @SuppressWarnings("unchecked")
+    public void loadFromFile(String filename) throws IOException, ClassNotFoundException {
         // Einlesen vom File 
-        for (CADShape item : GraphicList) {            
+        for (CADShape item : GraphicList) {
             PaintPanel.remove(item);
         }
-        
-        GraphicList = new ArrayList<CADShape>(); 
-        FileInputStream file = new FileInputStream(filename); 
-        ObjectInputStream InputStream = new ObjectInputStream(file); 
-        GraphicList=(ArrayList<CADShape>) InputStream.readObject(); 
-        InputStream.close(); 
-               
-        for (CADShape item : GraphicList) {            
+
+        GraphicList = new ArrayList<CADShape>();
+        FileInputStream file = new FileInputStream(filename);
+        ObjectInputStream InputStream = new ObjectInputStream(file);
+        GraphicList = (ArrayList<CADShape>) InputStream.readObject();
+        InputStream.close();
+
+        for (CADShape item : GraphicList) {
             PaintPanel.add(item);
             item.addPropertyChangeListener(ShapePropertyListener);
-            item.InitMouseListener();            
+            item.InitMouseListener();
+            item.Initialise();
         }
         PaintPanel.repaint();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem CheckBoxToolBar;
     private javax.swing.JToggleButton CircleButton;
@@ -819,6 +854,7 @@ public class MainView extends javax.swing.JFrame implements Serializable{
     private javax.swing.JMenuItem MenuItemOpen;
     private javax.swing.JMenuItem MenuItemPaste;
     private javax.swing.JMenuItem MenuItemSave;
+    private javax.swing.JMenuItem MenuItemSaveAs;
     private javax.swing.JMenu MenuView;
     private javax.swing.JButton MoveToBackButton;
     private javax.swing.JButton MoveToFrontButton;

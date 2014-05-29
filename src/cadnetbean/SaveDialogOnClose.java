@@ -19,6 +19,6 @@ public class SaveDialogOnClose {
     
     SaveDialogOnClose(){
         //JOptionPane.showMessageDialog(null, Message, Title, JOptionPane.OK_CANCEL_OPTION);
-        Option = JOptionPane.showOptionDialog(null, Message, Title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, Title);
+        Option = JOptionPane.showOptionDialog(null, Message, Title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, Title);
     }
 }
