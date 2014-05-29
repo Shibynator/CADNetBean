@@ -107,6 +107,8 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         LineColorButton = new javax.swing.JButton();
         LineColorPanel = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        LineWidthComboBox = new javax.swing.JComboBox();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         MoveToFrontButton = new javax.swing.JButton();
         LayerUpButton = new javax.swing.JButton();
         LayerDownButton = new javax.swing.JButton();
@@ -116,12 +118,15 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         MenuBar = new javax.swing.JMenuBar();
         MenuFile = new javax.swing.JMenu();
         MenuItemOpen = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         MenuItemSave = new javax.swing.JMenuItem();
         MenuItemSaveAs = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         MenuItemClose = new javax.swing.JMenuItem();
         MenuEdit = new javax.swing.JMenu();
         MenuItemCopy = new javax.swing.JMenuItem();
         MenuItemPaste = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         MenuItemDelet = new javax.swing.JMenuItem();
         MenuView = new javax.swing.JMenu();
         CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
@@ -306,6 +311,22 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(LineColorPanel);
         ToolBar.add(jSeparator2);
 
+        LineWidthComboBox.setBackground(java.awt.SystemColor.menu);
+        LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0.50 Pkt", "0.75 Pkt", "1.00 Pkt", "1.50 Pkt", "2.00 Pkt", "3.00 Pkt" }));
+        LineWidthComboBox.setToolTipText("LineWidth");
+        LineWidthComboBox.setMaximumSize(new java.awt.Dimension(80, 40));
+        LineWidthComboBox.setMinimumSize(new java.awt.Dimension(40, 40));
+        LineWidthComboBox.setPreferredSize(new java.awt.Dimension(80, 40));
+        LineWidthComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LineWidthComboBoxActionPerformed(evt);
+            }
+        });
+        ToolBar.add(LineWidthComboBox);
+
+        jSeparator6.setToolTipText("Linewidth");
+        ToolBar.add(jSeparator6);
+
         MoveToFrontButton.setFocusable(false);
         MoveToFrontButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         MoveToFrontButton.setLabel("TF");
@@ -371,7 +392,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ScrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
         ScrollPane.setWheelScrollingEnabled(false);
 
-        PaintPanel.setBackground(java.awt.Color.lightGray);
+        PaintPanel.setBackground(java.awt.Color.white);
         PaintPanel.setInputVerifier(PaintPanel.getInputVerifier());
         PaintPanel.setOpaque(true);
         PaintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,6 +435,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             }
         });
         MenuFile.add(MenuItemOpen);
+        MenuFile.add(jSeparator3);
 
         MenuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemSave.setText("save");
@@ -432,6 +454,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             }
         });
         MenuFile.add(MenuItemSaveAs);
+        MenuFile.add(jSeparator4);
 
         MenuItemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemClose.setText("close");
@@ -463,6 +486,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             }
         });
         MenuEdit.add(MenuItemPaste);
+        MenuEdit.add(jSeparator5);
 
         MenuItemDelet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
         MenuItemDelet.setText("delete");
@@ -590,6 +614,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                 }
                 if (Warnung.Option == JOptionPane.YES_OPTION) {
                     SaveLoad.savefile(GraphicList, false);
+                    System.exit(0);
                 }
             }
         }
@@ -647,7 +672,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (item.getSelected()) {
                 PaintPanel.remove(item);
                 DeleteObject = item;//referenz holen da das object nicht in der schlaufe aus dem array gelöscht werden darf
-
+                Save = false;
             }
         }
         GraphicList.remove(DeleteObject);
@@ -677,6 +702,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
         GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
         PaintPanel.repaint();
+        Save = false;
     }//GEN-LAST:event_MenuItemPasteActionPerformed
 
     private void MenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCopyActionPerformed
@@ -703,42 +729,39 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_PaintPanelMousePressed
 
     private void MoveToFrontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToFrontButtonActionPerformed
-
         for (CADShape item : GraphicList) {
-
             if (item.getSelected()) {
                 PaintPanel.moveToFront((Component) item);
+                Save = false;
             }
         }
     }//GEN-LAST:event_MoveToFrontButtonActionPerformed
 
     private void MoveToBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToBackButtonActionPerformed
         for (CADShape item : GraphicList) {
-
             if (item.getSelected()) {
                 PaintPanel.moveToBack((Component) item);
+                Save = false;
             }
         }
     }//GEN-LAST:event_MoveToBackButtonActionPerformed
 
     private void LayerUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerUpButtonActionPerformed
         for (CADShape item : GraphicList) {
-
             if (item.getSelected() && PaintPanel.getPosition(item) > 0)//wenn position = 0 dann darf nicht nochmal dekrementiert werden, da position = -1 => movetoback()
             {
                 PaintPanel.setPosition(item, PaintPanel.getPosition(item) - 1);
+                Save = false;
             }
         }
     }//GEN-LAST:event_LayerUpButtonActionPerformed
 
     private void LayerDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LayerDownButtonActionPerformed
-
         for (CADShape item : GraphicList) {
-
             if (item.getSelected()) {
                 PaintPanel.setPosition(item, PaintPanel.getPosition(item) + 1);
+                Save = false;
             }
-
         }
 
     }//GEN-LAST:event_LayerDownButtonActionPerformed
@@ -771,6 +794,37 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private void MenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveAsActionPerformed
         SaveLoad.savefile(GraphicList, true);
     }//GEN-LAST:event_MenuItemSaveAsActionPerformed
+
+    private void LineWidthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineWidthComboBoxActionPerformed
+        for (CADShape item : GraphicList) {
+            if (item.getSelected()) {
+                int Index = LineWidthComboBox.getSelectedIndex();
+                switch (Index) {
+                    case 0:
+                        item.LineThickness = 0.50f;
+                        break;
+                    case 1:
+                        item.LineThickness = 0.75f;
+                        break;
+                    case 2:
+                        item.LineThickness = 1.00f;
+                        break;
+                    case 4:
+                        item.LineThickness = 1.50f;
+                        break;
+                    case 5:
+                        item.LineThickness = 2.00f;
+                        break;
+                    case 6:
+                        item.LineThickness = 3.00f;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Save = false;
+        }
+    }//GEN-LAST:event_LineWidthComboBoxActionPerformed
 
     /*
      * Methode um Files zu öffnen und laden
@@ -829,6 +883,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private javax.swing.JToggleButton LineButton;
     private javax.swing.JButton LineColorButton;
     private javax.swing.JPanel LineColorPanel;
+    private javax.swing.JComboBox LineWidthComboBox;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuEdit;
     private javax.swing.JMenu MenuFile;
@@ -850,5 +905,9 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
     // End of variables declaration//GEN-END:variables
 }
