@@ -43,7 +43,7 @@ public abstract class CADShape extends JPanel {
     public Point ClickOffsetPoint = new Point();
     public Color DrawColor = Color.black;
     public Color FillColor =new Color(255,255,255,0);
-    public float LineThickness =40f;
+    public float LineThickness =1f;
     
     
     protected Boolean Selected = false;

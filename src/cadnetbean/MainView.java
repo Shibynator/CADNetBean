@@ -33,6 +33,7 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -78,10 +79,11 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     };
 
     // Creates Frame of MainView
-    public MainView() {
+    public MainView() throws IOException {
         setBounds(100, 100, 500, 400); // Minimale Fenstergrösse
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);	// Beim Programmstart automatisch in Vollbildmodus
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(ImageIO.read(new File("src\\images\\CADIcon.jpg")));
         initComponents();
         initToolTipText();
     }
@@ -147,7 +149,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.setPreferredSize(new java.awt.Dimension(142, 42));
 
         ToolBarButtons.add(LineButton);
-        LineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LineIcon.gif"))); // NOI18N
+        LineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/line.gif"))); // NOI18N
         LineButton.setSelected(true);
         LineButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         LineButton.setFocusable(false);
@@ -164,7 +166,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(LineButton);
 
         ToolBarButtons.add(RectangleButton);
-        RectangleButton.setText("R");
+        RectangleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rectangle.gif"))); // NOI18N
         RectangleButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         RectangleButton.setFocusable(false);
         RectangleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -181,7 +183,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(RectangleButton);
 
         ToolBarButtons.add(SquareButton);
-        SquareButton.setText("S");
+        SquareButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/square.gif"))); // NOI18N
         SquareButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SquareButton.setFocusable(false);
         SquareButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -198,7 +200,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(SquareButton);
 
         ToolBarButtons.add(EllipseButton);
-        EllipseButton.setText("E");
+        EllipseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ellipse.gif"))); // NOI18N
         EllipseButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         EllipseButton.setFocusable(false);
         EllipseButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -215,7 +217,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(EllipseButton);
 
         ToolBarButtons.add(CircleButton);
-        CircleButton.setText("C");
+        CircleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/circle.gif"))); // NOI18N
         CircleButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         CircleButton.setFocusable(false);
         CircleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -232,7 +234,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(CircleButton);
         ToolBar.add(jSeparator1);
 
-        FillColorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconFill.gif"))); // NOI18N
+        FillColorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FillIcon.gif"))); // NOI18N
         FillColorButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FillColorButton.setFocusable(false);
         FillColorButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -271,7 +273,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
 
         ToolBar.add(FillColorPanel);
 
-        LineColorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/brush.gif"))); // NOI18N
+        LineColorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BruschIcon.gif"))); // NOI18N
         LineColorButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         LineColorButton.setFocusable(false);
         LineColorButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -312,7 +314,8 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(jSeparator2);
 
         LineWidthComboBox.setBackground(java.awt.SystemColor.menu);
-        LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0.50 Pkt", "0.75 Pkt", "1.00 Pkt", "1.50 Pkt", "2.00 Pkt", "3.00 Pkt" }));
+        LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0.50 Pkt", "0.75 Pkt", "1.00 Pkt", "1.50 Pkt", "2.00 Pkt", "3.00 Pkt", "4.00 Pkt", "5.00 Pkt" }));
+        LineWidthComboBox.setSelectedIndex(2);
         LineWidthComboBox.setToolTipText("LineWidth");
         LineWidthComboBox.setMaximumSize(new java.awt.Dimension(80, 40));
         LineWidthComboBox.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -327,9 +330,9 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         jSeparator6.setToolTipText("Linewidth");
         ToolBar.add(jSeparator6);
 
+        MoveToFrontButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/forground.gif"))); // NOI18N
         MoveToFrontButton.setFocusable(false);
         MoveToFrontButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        MoveToFrontButton.setLabel("TF");
         MoveToFrontButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         MoveToFrontButton.setMaximumSize(new java.awt.Dimension(40, 40));
         MoveToFrontButton.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -342,9 +345,9 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         });
         ToolBar.add(MoveToFrontButton);
 
+        LayerUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/layerup.gif"))); // NOI18N
         LayerUpButton.setFocusable(false);
         LayerUpButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        LayerUpButton.setLabel("Up");
         LayerUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         LayerUpButton.setMaximumSize(new java.awt.Dimension(40, 40));
         LayerUpButton.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -357,9 +360,9 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         });
         ToolBar.add(LayerUpButton);
 
+        LayerDownButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/layerdown.gif"))); // NOI18N
         LayerDownButton.setFocusable(false);
         LayerDownButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        LayerDownButton.setLabel("Down");
         LayerDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         LayerDownButton.setMaximumSize(new java.awt.Dimension(40, 40));
         LayerDownButton.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -372,9 +375,9 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         });
         ToolBar.add(LayerDownButton);
 
+        MoveToBackButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.gif"))); // NOI18N
         MoveToBackButton.setFocusable(false);
         MoveToBackButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        MoveToBackButton.setLabel("TB");
         MoveToBackButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         MoveToBackButton.setMaximumSize(new java.awt.Dimension(40, 40));
         MoveToBackButton.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -728,15 +731,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
     }//GEN-LAST:event_PaintPanelMousePressed
 
-    private void MoveToFrontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToFrontButtonActionPerformed
-        for (CADShape item : GraphicList) {
-            if (item.getSelected()) {
-                PaintPanel.moveToFront((Component) item);
-                Save = false;
-            }
-        }
-    }//GEN-LAST:event_MoveToFrontButtonActionPerformed
-
     private void MoveToBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToBackButtonActionPerformed
         for (CADShape item : GraphicList) {
             if (item.getSelected()) {
@@ -809,14 +803,20 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                     case 2:
                         item.LineThickness = 1.00f;
                         break;
-                    case 4:
+                    case 3:
                         item.LineThickness = 1.50f;
                         break;
-                    case 5:
+                    case 4:
                         item.LineThickness = 2.00f;
                         break;
-                    case 6:
+                    case 5:
                         item.LineThickness = 3.00f;
+                        break;
+                    case 6:
+                        item.LineThickness = 4.00f;
+                        break;
+                    case 7:
+                        item.LineThickness = 5.00f;
                         break;
                     default:
                         break;
@@ -825,6 +825,15 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             Save = false;
         }
     }//GEN-LAST:event_LineWidthComboBoxActionPerformed
+
+    private void MoveToFrontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToFrontButtonActionPerformed
+        for (CADShape item : GraphicList) {
+            if (item.getSelected()) {
+                PaintPanel.moveToFront((Component) item);
+                Save = false;
+            }
+        }
+    }//GEN-LAST:event_MoveToFrontButtonActionPerformed
 
     /*
      * Methode um Files zu öffnen und laden
