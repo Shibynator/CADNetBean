@@ -316,7 +316,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         LineWidthComboBox.setBackground(java.awt.SystemColor.menu);
         LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0.50 Pkt", "0.75 Pkt", "1.00 Pkt", "1.50 Pkt", "2.00 Pkt", "3.00 Pkt", "4.00 Pkt", "5.00 Pkt" }));
         LineWidthComboBox.setSelectedIndex(2);
-        LineWidthComboBox.setToolTipText("LineWidth");
+        LineWidthComboBox.setToolTipText("");
         LineWidthComboBox.setMaximumSize(new java.awt.Dimension(80, 40));
         LineWidthComboBox.setMinimumSize(new java.awt.Dimension(40, 40));
         LineWidthComboBox.setPreferredSize(new java.awt.Dimension(80, 40));
@@ -544,19 +544,20 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initToolTipText() {
-        LineButton.setToolTipText("Line");
-        CircleButton.setToolTipText("Circle");
-        RectangleButton.setToolTipText("Rectangle");
-        SquareButton.setToolTipText("Square");
-        EllipseButton.setToolTipText("Ellipse");
-        FillColorButton.setToolTipText("Fillcolor");
-        FillColorPanel.setToolTipText("Choose fillcolor");
-        LineColorButton.setToolTipText("Linecolor");
+        LineButton.setToolTipText("draw line");
+        CircleButton.setToolTipText("draw circle");
+        RectangleButton.setToolTipText("draw rectangle");
+        SquareButton.setToolTipText("draw square");
+        EllipseButton.setToolTipText("draw ellipse");
+        FillColorButton.setToolTipText("set fillcolor");
+        FillColorPanel.setToolTipText("choose fillcolor");
+        LineColorButton.setToolTipText("set linecolor");
         LineColorPanel.setToolTipText("choose linecolor");
         MoveToBackButton.setToolTipText("to background");
         MoveToFrontButton.setToolTipText("to forground");
         LayerDownButton.setToolTipText("layer down");
         LayerUpButton.setToolTipText("layer up");
+        LineWidthComboBox.setToolTipText("line width");
     }
 
     // Action Listener für Menü Knöpfe
