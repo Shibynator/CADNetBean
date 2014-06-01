@@ -43,7 +43,23 @@ public class CADLine extends CADShape{
 
     @Override
     public Shape getShapeStyle() {
-        ((Line2D)ShapeStyle).setLine(1*LineThickness, 1*LineThickness, getWidth()-2*LineThickness, getHeight()-2*LineThickness);
+        double diagonale= Math.sqrt(Math.pow(getBounds().width, 2)+Math.pow(getBounds().height, 2));
+//        double yoffset=getBounds().height/diagonale*LineThickness*0.5;
+//        double xoffset=getBounds().width/diagonale*LineThickness*0.5;
+//        double yoffset=Math.sin(getBounds().width/(getBounds().height))*LineThickness;
+//        double xoffset=Math.cos(getBounds().width/(getBounds().height))*LineThickness;
+//        double yoffset=Math.cos(Math.abs(Math.atan(getBounds().height/(getBounds().width))))*LineThickness*2;
+//        double xoffset=Math.sin(Math.abs(Math.atan(getBounds().height/(getBounds().width))))*LineThickness*2;
+//          double xoffset=5*Math.abs(getBounds().width-LineThickness)/Math.sqrt(Math.pow(getBounds().width-LineThickness, 2)+Math.pow(getBounds().height, 2));
+//          double yoffset=5*Math.signum(getBounds().width-LineThickness)*getBounds().height/Math.sqrt(Math.pow(getBounds().width-LineThickness, 2)+Math.pow(getBounds().height, 2));
+//         double xoffset=2*getBounds().width*(LineThickness/diagonale);
+//         double yoffset=2*getBounds().height*(LineThickness/diagonale);
+        
+        double yoffset=0;
+        double xoffset=0;
+        
+//        ((Line2D)ShapeStyle).setLine(yoffset,xoffset , getWidth()-2*xoffset, getHeight()-2*xoffset);
+        ((Line2D)ShapeStyle).setLine(xoffset,yoffset , getWidth()-xoffset, getHeight()-yoffset);
         return ShapeStyle;
     }
 
