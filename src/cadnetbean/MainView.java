@@ -66,7 +66,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                                 item.setSelected(false);
                             }
                         }
-                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
+//                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
 //                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
 
                     } else {
@@ -730,17 +730,25 @@ public class MainView extends javax.swing.JFrame implements Serializable {
 
     private void PaintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMousePressed
         FirstClick = evt.getPoint();
+        CADShape NewElement=null;
+        
         try {
-            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
-            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
+             NewElement=ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick);
+//            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
+//            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
+            GraphicList.add(NewElement);
+            NewElement.addPropertyChangeListener(ShapePropertyListener);
 
         } catch (Exception error) {//TODO: Ist vielleicht überflüssig, ->immer mind. eine form angewählt
             // TODO Auto-generated catch block
             error.printStackTrace();
             JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
         }
-        PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
-        PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
+//        PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
+//        PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
+        PaintPanel.add(NewElement);
+        PaintPanel.moveToFront(NewElement);
+        NewElement.LineThickness=GetLineThickness();
     }//GEN-LAST:event_PaintPanelMousePressed
 
     private void MoveToBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoveToBackButtonActionPerformed
@@ -804,35 +812,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private void LineWidthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineWidthComboBoxActionPerformed
         for (CADShape item : GraphicList) {
             if (item.getSelected()) {
-                int Index = LineWidthComboBox.getSelectedIndex();
-                switch (Index) {
-                    case 0:
-                        item.LineThickness = 0.50f;
-                        break;
-                    case 1:
-                        item.LineThickness = 0.75f;
-                        break;
-                    case 2:
-                        item.LineThickness = 1.00f;
-                        break;
-                    case 3:
-                        item.LineThickness = 1.50f;
-                        break;
-                    case 4:
-                        item.LineThickness = 2.00f;
-                        break;
-                    case 5:
-                        item.LineThickness = 3.00f;
-                        break;
-                    case 6:
-                        item.LineThickness = 4.00f;
-                        break;
-                    case 7:
-                        item.LineThickness = 5.00f;
-                        break;
-                    default:
-                        break;
-                }
+                item.LineThickness=GetLineThickness();
             }
             Save = false;
         }
@@ -900,6 +880,30 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             item.Initialise();
         }
         PaintPanel.repaint();
+    }
+    
+    public float GetLineThickness(){
+        
+                switch (LineWidthComboBox.getSelectedIndex()) {
+                    case 0:
+                        return 0.50f;
+                    case 1:
+                        return 0.75f;
+                    case 2:
+                        return 1.00f;
+                    case 3:
+                        return 1.50f;
+                    case 4:
+                        return 2.00f;
+                    case 5:
+                        return 3.00f;
+                    case 6:
+                        return 4.00f;
+                    case 7:
+                        return 5.00f;
+                    default:
+                        return 0f;
+                }       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
