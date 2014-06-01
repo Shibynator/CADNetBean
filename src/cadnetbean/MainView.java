@@ -47,6 +47,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private Point FirstClick = new Point();
     public static boolean Saved = false;
     public static boolean Save = true;
+    public SetCoordinates Coordinates;
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
     SaveLoad SaveLoad = new SaveLoad();
 
@@ -128,6 +129,8 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         MenuEdit = new javax.swing.JMenu();
         MenuItemCopy = new javax.swing.JMenuItem();
         MenuItemPaste = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        MenuItemCoordinates = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         MenuItemDelet = new javax.swing.JMenuItem();
         MenuView = new javax.swing.JMenu();
@@ -314,8 +317,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         ToolBar.add(jSeparator2);
 
         LineWidthComboBox.setBackground(java.awt.SystemColor.menu);
-        LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0.50 Pkt", "0.75 Pkt", "1.00 Pkt", "1.50 Pkt", "2.00 Pkt", "3.00 Pkt", "4.00 Pkt", "5.00 Pkt" }));
-        LineWidthComboBox.setSelectedIndex(2);
+        LineWidthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1.00 Pkt", "2.00 Pkt", "3.00 Pkt", "4.00 Pkt", "5.00 Pkt" }));
         LineWidthComboBox.setToolTipText("");
         LineWidthComboBox.setMaximumSize(new java.awt.Dimension(80, 40));
         LineWidthComboBox.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -489,6 +491,15 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             }
         });
         MenuEdit.add(MenuItemPaste);
+        MenuEdit.add(jSeparator7);
+
+        MenuItemCoordinates.setText("set coordinates");
+        MenuItemCoordinates.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCoordinatesActionPerformed(evt);
+            }
+        });
+        MenuEdit.add(MenuItemCoordinates);
         MenuEdit.add(jSeparator5);
 
         MenuItemDelet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
@@ -836,6 +847,15 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         }
     }//GEN-LAST:event_MoveToFrontButtonActionPerformed
 
+    private void MenuItemCoordinatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCoordinatesActionPerformed
+        for (CADShape item : GraphicList) {
+            if (item.getSelected()) {
+                Coordinates = new SetCoordinates(item);
+                Coordinates.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_MenuItemCoordinatesActionPerformed
+
     /*
      * Methode um Files zu öffnen und laden
      */
@@ -899,6 +919,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private javax.swing.JMenu MenuFile;
     private javax.swing.JMenuItem MenuItemBackgroundcolor;
     private javax.swing.JMenuItem MenuItemClose;
+    private javax.swing.JMenuItem MenuItemCoordinates;
     private javax.swing.JMenuItem MenuItemCopy;
     private javax.swing.JMenuItem MenuItemDelet;
     private javax.swing.JMenuItem MenuItemOpen;
@@ -919,5 +940,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }
