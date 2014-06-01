@@ -1,24 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * *****************************************************************************
+ * Class:	SetCoordinates.java
+ * *****************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ *
+ * Author:	Feuz Bruno (FB)
+ *
+ * Datum:       01.06.2014
+ *
+ * Project:	CADNetBean
+ *
+ * Describtion:	Defines the Popup-Window to set Coordinates of a geometric 
+ *              Objekt
+ *
+ * Revision:	0.0	file created 0.1 modified	FB 01.06.2014
+ * *****************************************************************************
  */
 
+// package definition
 package cadnetbean;
 
+// importet packages
 import geometricforms.CADShape;
 import java.awt.Color;
 
-/**
- *
- * @author Bruno
- */
+
 public class SetCoordinates extends javax.swing.JFrame {
+    // Attributes
     CADShape Form;
     String Xcoord;
-    /**
-     * Creates new form SetCoordinates
-     */
+    
+    // creates new form SetCoordinates
     public SetCoordinates(CADShape Form) {
         this.Form = Form;
         setLocation(100, 100);
@@ -31,6 +43,8 @@ public class SetCoordinates extends javax.swing.JFrame {
     
     public void SetColumns(){
         XCoord.setColumns(11);
+        XCoord.setEnabled(true);
+        XCoord.setEditable(true);
         YCoord.setColumns(11);
         YCoord.setEditable(true);
         Length.setColumns(11);
@@ -93,24 +107,15 @@ public class SetCoordinates extends javax.swing.JFrame {
 
         XCoord.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         XCoord.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        XCoord.setFocusTraversalPolicyProvider(true);
-        XCoord.setFocusable(false);
         XCoord.setMaximumSize(new java.awt.Dimension(59, 20));
         XCoord.setMinimumSize(new java.awt.Dimension(59, 20));
-        XCoord.setRequestFocusEnabled(false);
-        XCoord.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                XCoordMouseClicked(evt);
-            }
-        });
+        XCoord.setPreferredSize(new java.awt.Dimension(59, 20));
 
         YCoord.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         YCoord.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        YCoord.setFocusTraversalPolicyProvider(true);
-        YCoord.setFocusable(false);
         YCoord.setMaximumSize(new java.awt.Dimension(59, 20));
         YCoord.setMinimumSize(new java.awt.Dimension(59, 20));
-        YCoord.setRequestFocusEnabled(false);
+        YCoord.setPreferredSize(new java.awt.Dimension(59, 20));
 
         TextX.setEditable(false);
         TextX.setText("X:");
@@ -123,19 +128,15 @@ public class SetCoordinates extends javax.swing.JFrame {
 
         Length.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         Length.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Length.setFocusTraversalPolicyProvider(true);
-        Length.setFocusable(false);
         Length.setMaximumSize(new java.awt.Dimension(59, 20));
         Length.setMinimumSize(new java.awt.Dimension(59, 20));
-        Length.setRequestFocusEnabled(false);
+        Length.setPreferredSize(new java.awt.Dimension(59, 20));
 
         Width.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         Width.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Width.setFocusTraversalPolicyProvider(true);
-        Width.setFocusable(false);
         Width.setMaximumSize(new java.awt.Dimension(59, 20));
         Width.setMinimumSize(new java.awt.Dimension(59, 20));
-        Width.setRequestFocusEnabled(false);
+        Width.setPreferredSize(new java.awt.Dimension(59, 20));
 
         TextL.setEditable(false);
         TextL.setText("L:");
@@ -174,7 +175,7 @@ public class SetCoordinates extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ButtonCancel, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +196,7 @@ public class SetCoordinates extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonAccept)
                     .addComponent(ButtonCancel))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -209,12 +210,6 @@ public class SetCoordinates extends javax.swing.JFrame {
         SetCoordinate(Form);
         setVisible(false);
     }//GEN-LAST:event_ButtonAcceptActionPerformed
-
-    private void XCoordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XCoordMouseClicked
-        XCoord.setText("0");
-        XCoord.setEnabled(true);
-        XCoord.setEditable(true);
-    }//GEN-LAST:event_XCoordMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
