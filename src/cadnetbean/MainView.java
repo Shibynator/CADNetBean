@@ -135,7 +135,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         MenuItemBackgroundcolor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CAD by ZjoeFeu");
+        setTitle("CAD by ZioeFeu");
         setBackground(java.awt.SystemColor.activeCaption);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("MainView"); // NOI18N
