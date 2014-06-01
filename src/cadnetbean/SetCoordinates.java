@@ -7,6 +7,7 @@
 package cadnetbean;
 
 import geometricforms.CADShape;
+import java.awt.Color;
 
 /**
  *
@@ -14,11 +15,13 @@ import geometricforms.CADShape;
  */
 public class SetCoordinates extends javax.swing.JFrame {
     CADShape Form;
+    String Xcoord;
     /**
      * Creates new form SetCoordinates
      */
     public SetCoordinates(CADShape Form) {
         this.Form = Form;
+        setLocation(100, 100);
         
         initComponents();
         SetColumns();
@@ -29,8 +32,11 @@ public class SetCoordinates extends javax.swing.JFrame {
     public void SetColumns(){
         XCoord.setColumns(11);
         YCoord.setColumns(11);
+        YCoord.setEditable(true);
         Length.setColumns(11);
+        Length.setEditable(true);
         Width.setColumns(11);
+        Width.setEditable(true);
     }
     
     public void GetCoordinate(CADShape Form){
@@ -86,14 +92,21 @@ public class SetCoordinates extends javax.swing.JFrame {
         });
 
         XCoord.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        XCoord.setText("jTextField1");
+        XCoord.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        XCoord.setFocusTraversalPolicyProvider(true);
         XCoord.setFocusable(false);
         XCoord.setMaximumSize(new java.awt.Dimension(59, 20));
         XCoord.setMinimumSize(new java.awt.Dimension(59, 20));
         XCoord.setRequestFocusEnabled(false);
+        XCoord.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                XCoordMouseClicked(evt);
+            }
+        });
 
         YCoord.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        YCoord.setText("jTextField4");
+        YCoord.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        YCoord.setFocusTraversalPolicyProvider(true);
         YCoord.setFocusable(false);
         YCoord.setMaximumSize(new java.awt.Dimension(59, 20));
         YCoord.setMinimumSize(new java.awt.Dimension(59, 20));
@@ -109,14 +122,16 @@ public class SetCoordinates extends javax.swing.JFrame {
         TextY.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         Length.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        Length.setText("jTextField1");
+        Length.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Length.setFocusTraversalPolicyProvider(true);
         Length.setFocusable(false);
         Length.setMaximumSize(new java.awt.Dimension(59, 20));
         Length.setMinimumSize(new java.awt.Dimension(59, 20));
         Length.setRequestFocusEnabled(false);
 
         Width.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        Width.setText("jTextField2");
+        Width.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Width.setFocusTraversalPolicyProvider(true);
         Width.setFocusable(false);
         Width.setMaximumSize(new java.awt.Dimension(59, 20));
         Width.setMinimumSize(new java.awt.Dimension(59, 20));
@@ -194,6 +209,12 @@ public class SetCoordinates extends javax.swing.JFrame {
         SetCoordinate(Form);
         setVisible(false);
     }//GEN-LAST:event_ButtonAcceptActionPerformed
+
+    private void XCoordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XCoordMouseClicked
+        XCoord.setText("0");
+        XCoord.setEnabled(true);
+        XCoord.setEditable(true);
+    }//GEN-LAST:event_XCoordMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
