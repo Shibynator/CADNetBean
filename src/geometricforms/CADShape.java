@@ -64,7 +64,7 @@ public abstract class CADShape extends JPanel {
   
         if(selected){
             setOpaque(false);
-            setCursor(new Cursor(Cursor.HAND_CURSOR));
+            setCursor(new Cursor(Cursor.MOVE_CURSOR));
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class CADShape extends JPanel {
                    setForeground(new Color(105,105,105,255));    
                 }
                 
-                setCursor(new Cursor(Cursor.MOVE_CURSOR));
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
                repaint();
             }
 
@@ -170,6 +170,20 @@ public abstract class CADShape extends JPanel {
                 repaint();
 
             }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if(Selected){
+                    if(iconframe.contains(e.getPoint()))
+                        setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+                    else
+                        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+                    
+                }
+                
+            }
+            
+            
 
         });
 
