@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
+import javax.swing.plaf.ColorUIResource;
 import sun.java2d.pipe.ShapeDrawPipe;
 
 /**
@@ -60,7 +61,11 @@ public abstract class CADShape extends JPanel {
         PropertyEvent.firePropertyChange("Selected", getSelected(), selected);
         Selected = selected;
         repaint();
-
+  
+        if(selected){
+            setOpaque(false);
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
     }
 
     protected Shape ShapeStyle;
@@ -112,16 +117,7 @@ public abstract class CADShape extends JPanel {
             public void mouseClicked(MouseEvent arg0) {//TODO: Kann wahrscheinlich wieder gelöscht werden
 
                 setSelected(true);
-                
-                if(arg0.getButton() == 3){
-                /*    KontextMenu Menu = new KontextMenu();
-                    add(Menu);
-                    Menu.show(Menu.test, 0, 0);
-                    //Menu.show(Menu.test, arg0.getX(), arg0.getY());
-                    //Menu.setBounds(50, 50 , 50, 50);
-                */   
-                   
-                }
+                      
             }
 
             @Override
@@ -136,11 +132,12 @@ public abstract class CADShape extends JPanel {
                 super.mouseEntered(e);
 
                 if (getSelected() == false) {
-                    setOpaque(true);
-                    setBackground(Color.lightGray);
+                   setOpaque(true);
+                   setForeground(new Color(105,105,105,255));    
                 }
                 
                 setCursor(new Cursor(Cursor.MOVE_CURSOR));
+               repaint();
             }
 
             @Override
@@ -150,8 +147,8 @@ public abstract class CADShape extends JPanel {
                 
                 if(getSelected()==false){
                 setOpaque(false);
-                setBackground(Color.white);
                 }
+                repaint();
             }
         });
 
