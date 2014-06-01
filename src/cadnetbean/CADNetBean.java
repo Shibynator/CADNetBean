@@ -8,6 +8,9 @@ package cadnetbean;
 
 import geometricforms.CADRectangle;
 import geometricforms.CADShape;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +26,11 @@ public class CADNetBean {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainView().setVisible(true);
+                try {
+                    new MainView().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(CADNetBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
