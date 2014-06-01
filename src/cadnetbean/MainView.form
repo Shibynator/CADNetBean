@@ -520,7 +520,7 @@
               </StringArray>
             </Property>
             <Property name="selectedIndex" type="int" value="2"/>
-            <Property name="toolTipText" type="java.lang.String" value="LineWidth"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 40]"/>
             </Property>
