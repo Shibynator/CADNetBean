@@ -65,7 +65,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                                 item.setSelected(false);
                             }
                         }
-                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
+//                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
 //                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
 
                     } else {

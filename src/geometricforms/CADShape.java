@@ -59,6 +59,7 @@ public abstract class CADShape extends JPanel {
 
         PropertyEvent.firePropertyChange("Selected", getSelected(), selected);
         Selected = selected;
+        repaint();
 
     }
 
