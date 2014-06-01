@@ -834,6 +834,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                 Coordinates.setVisible(true);
             }
         }
+        repaint();
     }//GEN-LAST:event_MenuItemCoordinatesActionPerformed
 
     /*
@@ -886,20 +887,14 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         
                 switch (LineWidthComboBox.getSelectedIndex()) {
                     case 0:
-                        return 0.50f;
-                    case 1:
-                        return 0.75f;
-                    case 2:
                         return 1.00f;
-                    case 3:
-                        return 1.50f;
-                    case 4:
+                    case 1:
                         return 2.00f;
-                    case 5:
+                    case 2:
                         return 3.00f;
-                    case 6:
+                    case 3:
                         return 4.00f;
-                    case 7:
+                    case 4:
                         return 5.00f;
                     default:
                         return 0f;
