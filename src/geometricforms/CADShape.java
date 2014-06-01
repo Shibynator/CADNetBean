@@ -171,6 +171,20 @@ public abstract class CADShape extends JPanel {
 
             }
 
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if(Selected){
+                    if(iconframe.contains(e.getPoint()))
+                        setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+                    else
+                        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+                    
+                }
+                
+            }
+            
+            
+
         });
 
     }
