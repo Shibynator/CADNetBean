@@ -68,10 +68,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
 //                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
 //                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
 
-                    } else {
-                        ((CADShape) sourceObject).setOpaque(false);
-                        ((CADShape) sourceObject).setBackground(Color.white);
-                    }
+                    } 
 
                 }
             }
@@ -629,6 +626,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (item.getSelected()) {
                 item.FillColor = FillColorPanel.getBackground();
                 Save = false;
+                item.repaint();
             }
         }
     }//GEN-LAST:event_FillColorButtonActionPerformed
@@ -665,6 +663,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (item.getSelected()) {
                 item.DrawColor = LineColorPanel.getBackground();
                 Save = false;
+                item.repaint();
             }
         }
     }//GEN-LAST:event_LineColorButtonActionPerformed
@@ -775,6 +774,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (item.getSelected()) {
                 item.FillColor = FillColorPanel.getBackground();
                 Save = false;
+                item.repaint();
             }
         }
     }//GEN-LAST:event_FillColorPanelMouseClicked
@@ -790,6 +790,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (item.getSelected()) {
                 item.DrawColor = LineColorPanel.getBackground();
                 Save = false;
+                item.repaint();
             }
         }
     }//GEN-LAST:event_LineColorPanelMouseClicked
