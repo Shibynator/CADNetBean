@@ -35,6 +35,7 @@ public class SetCoordinates extends javax.swing.JFrame {
         this.Form = Form;
         setLocation(100, 100);
         
+        // initialise the components
         initComponents();
         SetColumns();
         GetCoordinate(Form);
