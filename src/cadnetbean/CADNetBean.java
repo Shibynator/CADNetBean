@@ -11,6 +11,7 @@ import geometricforms.CADShape;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -28,9 +29,12 @@ public class CADNetBean {
             public void run() {
                 try {
                     new MainView().setVisible(true);
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(CADNetBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                
             }
         });
         

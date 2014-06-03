@@ -137,7 +137,7 @@ public abstract class CADShape extends JPanel {
                 }
                 
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
-               repaint();
+                repaint();
             }
 
             @Override
@@ -146,7 +146,7 @@ public abstract class CADShape extends JPanel {
                 super.mouseExited(e);
                 
                 if(getSelected()==false){
-                setOpaque(false);
+                    setOpaque(false);
                 }
                 repaint();
             }

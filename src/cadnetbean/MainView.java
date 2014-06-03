@@ -899,7 +899,13 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                         return 5.00f;
                     default:
                         return 0f;
-                }       
+                }                           
+    }
+    
+    public void tutnix(){
+        
+        CADShape test;
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
