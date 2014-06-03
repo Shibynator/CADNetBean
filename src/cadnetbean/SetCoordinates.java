@@ -22,7 +22,7 @@ package cadnetbean;
 
 // importet packages
 import geometricforms.CADShape;
-import java.awt.Color;
+//import java.awt.Color;
 
 
 public class SetCoordinates extends javax.swing.JFrame {
@@ -37,24 +37,31 @@ public class SetCoordinates extends javax.swing.JFrame {
         
         // initialise the components
         initComponents();
-        SetColumns();
+        initTextfields();
         GetCoordinate(Form);
         
     }
     
-    public void SetColumns(){
+    /*
+    * Initialisierung der Eingabetextfelder
+    */
+    private void initTextfields(){
         XCoord.setColumns(11);
         XCoord.setEnabled(true);
         XCoord.setEditable(true);
+        XCoord.setToolTipText("coordinate x");
         YCoord.setColumns(11);
         YCoord.setEditable(true);
+        YCoord.setToolTipText("coordinate y");
         Length.setColumns(11);
         Length.setEditable(true);
+        Length.setToolTipText("length of the object");
         Width.setColumns(11);
         Width.setEditable(true);
+        Width.setToolTipText("width of the object");
     }
     
-    public void GetCoordinate(CADShape Form){
+    private void GetCoordinate(CADShape Form){
         XCoord.setText(new String(Integer.toString(Form.getX())));
         YCoord.setText(new String(Integer.toString(Form.getY())));
         Length.setText(new String(Integer.toString(Form.getWidth())));
