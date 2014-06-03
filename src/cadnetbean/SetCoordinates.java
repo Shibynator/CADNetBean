@@ -22,6 +22,8 @@ package cadnetbean;
 
 // importet packages
 import geometricforms.CADShape;
+import geometricforms.CADSquare;
+import geometricforms.CADCircle;
 //import java.awt.Color;
 
 
@@ -29,15 +31,15 @@ public class SetCoordinates extends javax.swing.JFrame {
     // Attributes
     CADShape Form;
     String Xcoord;
-    
+     
     // creates new form SetCoordinates
     public SetCoordinates(CADShape Form) {
         this.Form = Form;
         setLocation(100, 100);
-        
+               
         // initialise the components
         initComponents();
-        initTextfields();
+        initTextfields(Form);
         GetCoordinate(Form);
         
     }
@@ -45,7 +47,7 @@ public class SetCoordinates extends javax.swing.JFrame {
     /*
     * Initialisierung der Eingabetextfelder
     */
-    private void initTextfields(){
+    private void initTextfields(CADShape Form){
         XCoord.setColumns(11);
         XCoord.setEnabled(true);
         XCoord.setEditable(true);
@@ -58,7 +60,23 @@ public class SetCoordinates extends javax.swing.JFrame {
         Length.setToolTipText("length of the object");
         Width.setColumns(11);
         Width.setEditable(true);
-        Width.setToolTipText("width of the object");
+        Width.setToolTipText("height of the object");
+        
+        if(Form instanceof CADSquare){
+            TextL.setText("S");
+            Length.setToolTipText("lateral length of the square");
+            TextH.setVisible(false);
+            Width.setVisible(false);
+            
+        }
+        
+        if(Form instanceof CADCircle){
+            TextL.setText("R");
+            TextL.setToolTipText("radius of the circle");
+            TextH.setVisible(false);
+            Width.setVisible(false);
+            
+        }
     }
     
     private void GetCoordinate(CADShape Form){
@@ -71,6 +89,9 @@ public class SetCoordinates extends javax.swing.JFrame {
     public void SetCoordinate(CADShape Form){
         Form.setLocation(new Integer(XCoord.getText()), new Integer(YCoord.getText()));
         Form.setSize(new Integer(Length.getText()), new Integer(Width.getText()));
+        if((Form instanceof CADSquare) || (Form instanceof CADCircle)){
+            Form.setSize(new Integer(Length.getText()), new Integer(Length.getText()));
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
