@@ -1,7 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * *****************************************************************************
+ * Class:	CADShape.java
+ * *****************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ *
+ * Author:	Daniel Ziörjen
+ *
+ * Datum: 04.06.2014
+ *
+ * Project:	CADNetBean
+ *
+ * Describtion:	
+ * Diese Klasse erstellt ein  Jpanel in welchem geometrische Objekte gezeichnet
+ * werden können. Durch das ableiten dieser Klasse und dem Implementieren der abstrakten
+ * Methoden kann jeweils ein solches geometrisches Objekt definiert werden.
+ * Diese Klasse implementiert ausserdem alle Mouse-Aktionen wie Drag, Resize, Click ect.
+ * Alle abgeleiteten Klassen verfügen somit bereits schon diese Funktionalität.
+ * 
+ * ******************************************************************************
  */
 package geometricforms;
 

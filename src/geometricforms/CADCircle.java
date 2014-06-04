@@ -1,7 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * *****************************************************************************
+ * Class:	CADCircle.java
+ * *****************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ *
+ * Author:	Daniel Ziörjen
+ *
+ * Datum: 04.06.2014
+ *
+ * Project:	CADNetBean
+ *
+ * Describtion:	
+ * Diese Klasse erstellt ein quadratisches Jpanel in welchem ein Kreis gezeichnet
+ * wird. Zu diesem Zweck wird nur die setbounds-Methode überschritten.
+ * Alle anderen Funktionalitäten erbt sie von der Klasse CADShape.
+ * Zukünftige Kreis-spezifische Features können ohne Probleme implementiert werden.
+ * 
+ * ******************************************************************************
  */
 
 package geometricforms;
@@ -9,10 +24,6 @@ package geometricforms;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-/**
- *
- * @author Daxx
- */
 public class CADCircle extends CADEllipse {
     
     public CADCircle() {
