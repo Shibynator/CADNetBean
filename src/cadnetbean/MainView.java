@@ -671,18 +671,26 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
         {
             GeneratedShape.setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
+            if(GeneratedShape instanceof CADLine)
+                ((CADLine)GeneratedShape).Mirroring=false;
         } 
         else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
         {
             GeneratedShape.setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
+            if(GeneratedShape instanceof CADLine)
+                ((CADLine)GeneratedShape).Mirroring=true;
         } 
         else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
         {
             GeneratedShape.setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
+            if(GeneratedShape instanceof CADLine)
+                ((CADLine)GeneratedShape).Mirroring=true;
         } 
         else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
         {
             GeneratedShape.setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
+            if(GeneratedShape instanceof CADLine)
+                ((CADLine)GeneratedShape).Mirroring=false;
         }
         
         GeneratedShape.repaint();

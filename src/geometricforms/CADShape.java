@@ -196,37 +196,29 @@ public abstract class CADShape extends JPanel {
         
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(FillColor);
-            g2.fill(getShapeStyle());
-            
-            g2.setStroke(new BasicStroke(LineThickness));
-            g2.setColor(DrawColor);
-            g2.draw(getShapeStyle());
-        
-        
+        g2.fill(getShapeStyle());     
+        g2.setStroke(new BasicStroke(LineThickness));
+        g2.setColor(DrawColor);
+        g2.draw(getShapeStyle());
         
         if (getSelected() == true) {
 
             try {
-                //            g.drawImage(ResizeIcon, getWidth() - iconsize, getHeight() - iconsize, iconsize, iconsize, this);
                 g.drawImage(ImageIO.read(new File("src\\images\\ResizeIcon3.gif")),iconframe.x,iconframe.y,iconframe.width,iconframe.height,this);
             } catch (IOException ex) {
                 Logger.getLogger(CADShape.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null,"Datei in "+ System.getProperty("user.dir").toString()+" nicht gefunden", "Fehler beim IconLaden", JOptionPane.OK_CANCEL_OPTION);
             }
-        }
-        
-        
+        }  
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-//        super.addPropertyChangeListener(listener); //To change body of generated methods, choose Tools | Templates.
         PropertyEvent.addPropertyChangeListener(listener);
     }
 
     @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-//        super.removePropertyChangeListener(listener); //To change body of generated methods, choose Tools | Templates.
         PropertyEvent.removePropertyChangeListener(listener);
     }
 
@@ -242,16 +234,14 @@ public abstract class CADShape extends JPanel {
     public void InitMouseListener(){
         
         addMouseListener(new MouseAdapter() {
+            
             @Override
             public void mouseClicked(MouseEvent arg0) {
-
                 setSelected(true);
-
             }
 
             @Override
             public void mousePressed(MouseEvent arg0) {
-
                 ClickOffsetPoint = arg0.getPoint();
             }
 

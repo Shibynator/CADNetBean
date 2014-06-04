@@ -19,30 +19,21 @@ import java.awt.geom.Rectangle2D;
  * @author Daxx
  */
 public class CADRectangle extends CADShape{
-    
-    
-    
-    
+
     public CADRectangle() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public CADRectangle(Point Koord) {
 		super(Koord);
-		// TODO Auto-generated constructor stub
 				
 	}
 	
-	public CADRectangle(Rectangle Frame){
-		
-		super(Frame);
-		
+	public CADRectangle(Rectangle Frame){	
+            super(Frame);	
 	}
         
         public CADRectangle(CADShape copy){
-		
-		super(copy);
-		
+            super(copy);	
 	}      
 
     @Override
