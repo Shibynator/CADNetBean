@@ -4,7 +4,7 @@
  * *****************************************************************************
  * Company:	Berner Fachhochschule für Technik und Informatik
  *
- * Author:	Feuz Bruno (FB)
+ * Author:	Feuz Bruno
  *
  * Datum: 06.05.2014
  *
