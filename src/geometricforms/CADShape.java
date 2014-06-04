@@ -5,7 +5,6 @@
  */
 package geometricforms;
 
-import com.sun.org.apache.regexp.internal.RETest;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,11 +13,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
@@ -26,13 +23,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.border.Border;
-import javax.swing.plaf.ColorUIResource;
-import sun.java2d.pipe.ShapeDrawPipe;
 
 /**
  *
@@ -45,10 +37,7 @@ public abstract class CADShape extends JPanel {
     public Color DrawColor = Color.black;
     public Color FillColor =new Color(255,255,255,0);
     public float LineThickness =1f;
-    
-    
     protected Boolean Selected = false;
-//    protected BufferedImage ResizeIcon;
     protected int iconsize=30;
     protected Rectangle iconframe;
 
@@ -97,7 +86,6 @@ public abstract class CADShape extends JPanel {
         DrawColor=copy.DrawColor;
         FillColor=copy.FillColor;
         
-        
         Initialise();
         
     }
@@ -107,86 +95,8 @@ public abstract class CADShape extends JPanel {
     public  void Initialise() {
 
         InitShapeStyle();
-        
         setOpaque(false);
-//        LoadImageApp();
-        
-        
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent arg0) {//TODO: Kann wahrscheinlich wieder gelöscht werden
-
-                setSelected(true);
-                      
-            }
-
-            @Override
-            public void mousePressed(MouseEvent arg0) {
-
-                ClickOffsetPoint = arg0.getPoint();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-                super.mouseEntered(e);
-
-                if (getSelected() == false) {
-                   setOpaque(true);
-                   setForeground(new Color(105,105,105,255));    
-                }
-                
-                setCursor(new Cursor(Cursor.HAND_CURSOR));
-                repaint();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-                super.mouseExited(e);
-                
-                if(getSelected()==false){
-                    setOpaque(false);
-                }
-                repaint();
-            }
-        });
-
-        addMouseMotionListener(new MouseMotionAdapter() {
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-
-                super.mouseDragged(e);//TODO: Vielleicht überflüssig
-
-                if(iconframe.contains(e.getPoint())){
-                      
-                    setBounds(getBounds().x,getBounds().y,getBounds().width+(e.getX()- ClickOffsetPoint.x),getBounds().height+(e.getY()-ClickOffsetPoint.y));
-                    ClickOffsetPoint=e.getPoint();
-                }
-                else {
-                    setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);
-                }
-                repaint();
-
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                if(Selected){
-                    if(iconframe.contains(e.getPoint()))
-                        setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
-                    else
-                        setCursor(new Cursor(Cursor.MOVE_CURSOR));
-                    
-                }
-                
-            }
-            
-            
-
-        });
-
+        InitMouseListener();
     }
 
     @Override
@@ -234,14 +144,15 @@ public abstract class CADShape extends JPanel {
     public void InitMouseListener(){
         
         addMouseListener(new MouseAdapter() {
-            
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                setSelected(true);
+
+                setSelected(true);          
             }
 
             @Override
             public void mousePressed(MouseEvent arg0) {
+
                 ClickOffsetPoint = arg0.getPoint();
             }
 
@@ -251,9 +162,12 @@ public abstract class CADShape extends JPanel {
                 super.mouseEntered(e);
 
                 if (getSelected() == false) {
-                    setOpaque(true);
-                    setBackground(Color.lightGray);
+                   setOpaque(true);
+                   setForeground(new Color(105,105,105,255));    
                 }
+                
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
+                repaint();
             }
 
             @Override
@@ -262,9 +176,38 @@ public abstract class CADShape extends JPanel {
                 super.mouseExited(e);
                 
                 if(getSelected()==false){
-                setOpaque(false);
-                setBackground(Color.white);
+                    setOpaque(false);
                 }
+                repaint();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+                super.mouseDragged(e);//TODO: Vielleicht überflüssig
+
+                if(iconframe.contains(e.getPoint())){
+                    
+                    setBounds(getBounds().x,getBounds().y,getBounds().width+(e.getX()- ClickOffsetPoint.x),getBounds().height+(e.getY()-ClickOffsetPoint.y));
+                    ClickOffsetPoint=e.getPoint();
+                }
+                else {
+                    setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);
+                }
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if(Selected){
+                    if(iconframe.contains(e.getPoint()))
+                        setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+                    else
+                        setCursor(new Cursor(Cursor.MOVE_CURSOR));                    
+                }               
             }
         });
     }

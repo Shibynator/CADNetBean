@@ -23,7 +23,6 @@ import geometricforms.*;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.print.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
 
     // Attributs
     private static final long serialVersionUID = 1L;
-    private List<CADShape> GraphicList = new ArrayList<CADShape>();
+    private List<CADShape> GraphicList = new ArrayList<>();
     private CADShape ShapeStyle = new CADLine();
     private CADShape CopyBuffer;
     private Point FirstClick = new Point();
@@ -51,24 +50,19 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
     SaveLoad SaveLoad = new SaveLoad();
 
-    private PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
+    private final PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
+        @Override
         public void propertyChange(PropertyChangeEvent arg0) {
             Object sourceObject = arg0.getSource();
-
+            
             if (sourceObject instanceof CADShape) {
-
                 if (arg0.getPropertyName().equals("Selected")) {
-
                     if ((Boolean) arg0.getNewValue() != false) {
-
                         for (CADShape item : GraphicList) {
                             if (item != sourceObject) {
                                 item.setSelected(false);
                             }
                         }
-//                        ((CADShape) sourceObject).setBackground(Color.green);//TODO: nur zum testselektieren
-//                        PaintPanel.moveToFront((Component)sourceObject);//TODO: nur zum testselektieren
-
                     } 
 
                 }
@@ -619,7 +613,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             if (Save == true) {
                 System.exit(0);
             } else {
-                //JOptionPane.showMessageDialog(null, "Datei ist nicht gespeichert", "File not saved", JOptionPane.QUESTION_MESSAGE);
                 SaveDialogOnClose Warnung = new SaveDialogOnClose();
                 if (Warnung.Option == JOptionPane.NO_OPTION) {
                     System.exit(0);
@@ -643,29 +636,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
     private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
-//        if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
-//        {
-//            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
-//        } 
-//        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
-//        {
-//            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
-//        } 
-//        else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
-//        {
-//            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
-//        } 
-//        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
-//        {
-//            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
-//        }
-
-//        GraphicList.get(GraphicList.size() - 1).repaint();
-        
-        
-        
-        
-        
+               
         CADShape GeneratedShape = GraphicList.get(GraphicList.size() - 1);
         
         if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
@@ -700,7 +671,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         for (CADShape item : GraphicList) {
 
             item.setSelected(false);
-//            item.setBackground(Color.white);//TODO: Hintergrundfarbe?
             item.setOpaque(false);
         }
     }//GEN-LAST:event_PaintPanelMouseClicked
@@ -735,18 +705,10 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             try {
                 GraphicList.add(CopyBuffer.getClass().getConstructor(CADShape.class).newInstance(CopyBuffer));
                 CopyBuffer = GraphicList.get(GraphicList.size() - 1);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
+        } catch (NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
@@ -768,19 +730,14 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         CADShape NewElement=null;
         
         try {
-             NewElement=ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick);
-//            GraphicList.add(ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick));
-//            GraphicList.get(GraphicList.size() - 1).addPropertyChangeListener(ShapePropertyListener);
+            NewElement=ShapeStyle.getClass().getConstructor(Point.class).newInstance(FirstClick);
             GraphicList.add(NewElement);
             NewElement.addPropertyChangeListener(ShapePropertyListener);
 
-        } catch (Exception error) {//TODO: Ist vielleicht überflüssig, ->immer mind. eine form angewählt
-            // TODO Auto-generated catch block
-            error.printStackTrace();
+        } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException error) {            
             JOptionPane.showMessageDialog(null, "Bitte wählen Sie zuerst eine Form aus", "Keine Form ausgewählt", JOptionPane.OK_CANCEL_OPTION);
         }
-//        PaintPanel.add(GraphicList.get(GraphicList.size() - 1));
-//        PaintPanel.moveToFront(GraphicList.get(GraphicList.size() - 1));
+        
         PaintPanel.add(NewElement);
         PaintPanel.moveToFront(NewElement);
         NewElement.LineThickness=GetLineThickness();
@@ -890,7 +847,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         try {
             loadFromFile(OPEN.getSelectedFile().getAbsolutePath());
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();    // TODO Auto-generated catch block 
             JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden", "File not found", JOptionPane.OK_CANCEL_OPTION);
         }
     }
@@ -905,7 +861,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
             PaintPanel.remove(item);
         }
 
-        GraphicList = new ArrayList<CADShape>();
+        GraphicList = new ArrayList<>();
         FileInputStream file = new FileInputStream(filename);
         ObjectInputStream InputStream = new ObjectInputStream(file);
         GraphicList = (ArrayList<CADShape>) InputStream.readObject();
@@ -922,28 +878,22 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     
     public float GetLineThickness(){
         
-                switch (LineWidthComboBox.getSelectedIndex()) {
-                    case 0:
-                        return 1.00f;
-                    case 1:
-                        return 2.00f;
-                    case 2:
-                        return 3.00f;
-                    case 3:
-                        return 4.00f;
-                    case 4:
-                        return 5.00f;
-                    default:
-                        return 0f;
-                }                           
+        switch (LineWidthComboBox.getSelectedIndex()) {
+            case 0:
+                return 1.00f;
+            case 1:
+                return 2.00f;
+            case 2:
+                return 3.00f;
+            case 3:
+                return 4.00f;
+            case 4:
+                return 5.00f;
+            default:
+                return 0f;
+        }                           
     }
     
-    public void tutnix(){
-        
-        CADShape test;
-        
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem CheckBoxToolBar;
     private javax.swing.JToggleButton CircleButton;

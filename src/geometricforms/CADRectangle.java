@@ -6,9 +6,6 @@
 
 package geometricforms;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -21,20 +18,19 @@ import java.awt.geom.Rectangle2D;
 public class CADRectangle extends CADShape{
 
     public CADRectangle() {
-	}
+    }
 
-	public CADRectangle(Point Koord) {
-		super(Koord);
-				
-	}
-	
-	public CADRectangle(Rectangle Frame){	
-            super(Frame);	
-	}
-        
-        public CADRectangle(CADShape copy){
-            super(copy);	
-	}      
+    public CADRectangle(Point Koord) {
+        super(Koord);
+    }
+
+    public CADRectangle(Rectangle Frame) {
+        super(Frame);
+    }
+
+    public CADRectangle(CADShape copy) {
+        super(copy);
+    }  
 
     @Override
     public Shape getShapeStyle() {

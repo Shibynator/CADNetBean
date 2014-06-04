@@ -16,32 +16,22 @@ import java.awt.Rectangle;
 public class CADSquare extends CADRectangle {
     
     public CADSquare() {
-		// TODO Auto-generated constructor stub
-	}
+    }
 
-	public CADSquare(Point Koord) {
-		super(Koord);
-		// TODO Auto-generated constructor stub
-	}
+    public CADSquare(Point Koord) {
+        super(Koord);
+    }
 
-	public CADSquare(Rectangle Frame) {
-		super(Frame);
-		// TODO Auto-generated constructor stub
-	}
-        
-        public CADSquare(CADShape copy){
-		
-		super(copy);
-		
-	}
+    public CADSquare(Rectangle Frame) {
+        super(Frame);
+    }
 
-	
+    public CADSquare(CADShape copy) {
+        super(copy);
+    }
+
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
 		super.setBounds(x, y, height, height);
-	}
-    
-    
-    
+	}  
 }

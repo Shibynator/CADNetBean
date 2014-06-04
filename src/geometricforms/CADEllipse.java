@@ -6,12 +6,10 @@
 
 package geometricforms;
 
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
-import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -21,24 +19,19 @@ public class CADEllipse extends CADShape {
     
     
     public CADEllipse() {
-		// TODO Auto-generated constructor stub
-	}
+    }
 
-	public CADEllipse(Point Koord) {
-		super(Koord);
-		// TODO Auto-generated constructor stub
-	}
+    public CADEllipse(Point Koord) {
+        super(Koord);
+    }
 
-	public CADEllipse(Rectangle Frame) {
-		super(Frame);
-		// TODO Auto-generated constructor stub
-	}
+    public CADEllipse(Rectangle Frame) {
+        super(Frame);
+    }
         
-        public CADEllipse(CADShape copy){
-		
-		super(copy);
-		
-	}
+    public CADEllipse(CADShape copy) {
+        super(copy);
+    }
 
 
     @Override
