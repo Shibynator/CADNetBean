@@ -643,21 +643,49 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_FillColorButtonActionPerformed
 
     private void PaintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseDragged
+//        if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
+//        {
+//            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
+//        } 
+//        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
+//        {
+//            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
+//        } 
+//        else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
+//        {
+//            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
+//        } 
+//        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
+//        {
+//            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
+//        }
+
+//        GraphicList.get(GraphicList.size() - 1).repaint();
+        
+        
+        
+        
+        
+        CADShape GeneratedShape = GraphicList.get(GraphicList.size() - 1);
+        
         if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
         {
-            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
-        } else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
+            GeneratedShape.setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
+        } 
+        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y > 0)//negativ width and positiv height
         {
-            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
-        } else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
+            GeneratedShape.setBounds(evt.getX(), FirstClick.y, FirstClick.x - evt.getX(), evt.getY() - FirstClick.y);
+        } 
+        else if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y < 0)//positiv width and negativ height
         {
-            GraphicList.get(GraphicList.size() - 1).setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
-        } else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
+            GeneratedShape.setBounds(FirstClick.x, evt.getY(), evt.getX() - FirstClick.x, FirstClick.y - evt.getY());
+        } 
+        else if (evt.getX() - FirstClick.x < 0 && evt.getY() - FirstClick.y < 0)//negativ width and negativ height
         {
-            GraphicList.get(GraphicList.size() - 1).setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
+            GeneratedShape.setBounds(evt.getX(), evt.getY(), FirstClick.x - evt.getX(), FirstClick.y - evt.getY());
         }
-
-        GraphicList.get(GraphicList.size() - 1).repaint();
+        
+        GeneratedShape.repaint();
     }//GEN-LAST:event_PaintPanelMouseDragged
 
     private void PaintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaintPanelMouseClicked

@@ -7,6 +7,7 @@
 package geometricforms;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
@@ -37,8 +38,14 @@ public class CADLine extends CADShape{
     @Override
     public void paint(Graphics g) {
          
-        g.drawLine(0,0,getBounds().width-1,getBounds().height-1);
+//        g.drawLine(0,0,getBounds().width-1,getBounds().height-1);
         super.paint(g);
+//        Graphics2D g2 = (Graphics2D) g;
+//        
+//        g2.rotate(Math.atan2(getBounds().height, getBounds().width),0,0);
+////        g2.rotate(Math.atan2(getBounds().width, getBounds().height),0,0);
+//        g2.drawLine(0,0,getBounds().width,getBounds().height);
+        
     }
 
     @Override
@@ -60,6 +67,7 @@ public class CADLine extends CADShape{
         
 //        ((Line2D)ShapeStyle).setLine(yoffset,xoffset , getWidth()-2*xoffset, getHeight()-2*xoffset);
         ((Line2D)ShapeStyle).setLine(xoffset,yoffset , getWidth()-xoffset, getHeight()-yoffset);
+        
         return ShapeStyle;
     }
 
