@@ -808,6 +808,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         for (CADShape item : GraphicList) {
             if (item.getSelected()) {
                 item.LineThickness=GetLineThickness();
+                item.repaint();
             }
             Save = false;
         }
