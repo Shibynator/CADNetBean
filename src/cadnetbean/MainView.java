@@ -886,7 +886,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         JFileChooser OPEN = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".cad files", "cad");
         OPEN.setFileFilter(filter);
-        OPEN.setDialogTitle("Öffnen...");
+        OPEN.setDialogTitle("Open...");
         OPEN.setDialogType(JFileChooser.OPEN_DIALOG); // Dialog zum Oeffnen
         int returnVal = OPEN.showOpenDialog(null); // Dialog an Parent-Window anhaengen 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -895,7 +895,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         try {
             loadFromFile(OPEN.getSelectedFile().getAbsolutePath());
         } catch (ClassNotFoundException | IOException e) {
-            JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden", "File not found", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showMessageDialog(null, "File couldn't been open", "File not found", JOptionPane.OK_CANCEL_OPTION);
         }
     }
 
