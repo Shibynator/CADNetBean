@@ -203,21 +203,21 @@ public abstract class CADShape extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
 
-                super.mouseDragged(e);//TODO: Vielleicht überflüssig
+                super.mouseDragged(e);
 
-                if(iconframe.contains(e.getPoint())){
+                if(iconframe.contains(e.getPoint())){//falls klick innerhalb resizeicon -> Fenstergrösse verändern
                     
                     setBounds(getBounds().x,getBounds().y,getBounds().width+(e.getX()- ClickOffsetPoint.x),getBounds().height+(e.getY()-ClickOffsetPoint.y));
                     ClickOffsetPoint=e.getPoint();
                 }
                 else {
-                    setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);
+                    setLocation(getX() + e.getX() - ClickOffsetPoint.x, getY() + e.getY() - ClickOffsetPoint.y);//position verändern
                 }
                 repaint();
             }
 
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(MouseEvent e) {//mousezeiger anhand position verändern
                 if(Selected){
                     if(iconframe.contains(e.getPoint()))
                         setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));

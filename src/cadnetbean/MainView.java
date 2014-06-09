@@ -50,6 +50,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
     ToolBarButtonGroup ToolBarButtons = new ToolBarButtonGroup();
     SaveLoad SaveLoad = new SaveLoad();
 
+    //PropertyChangeListener zum detektieren von Selektion-Vorgängen
     private final PropertyChangeListener ShapePropertyListener = new PropertyChangeListener() {
         @Override
         public void propertyChange(PropertyChangeEvent arg0) {
@@ -64,7 +65,6 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                             }
                         }
                     } 
-
                 }
             }
         }
@@ -639,6 +639,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
                
         CADShape GeneratedShape = GraphicList.get(GraphicList.size() - 1);
         
+        //Fenster aufziehen ->vier folgende verschiedene Szenarien können auftreten
         if (evt.getX() - FirstClick.x > 0 && evt.getY() - FirstClick.y > 0)//positiv width and height
         {
             GeneratedShape.setBounds(FirstClick.x, FirstClick.y, evt.getX() - FirstClick.x, evt.getY() - FirstClick.y);
@@ -704,7 +705,7 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         try {
             try {
                 GraphicList.add(CopyBuffer.getClass().getConstructor(CADShape.class).newInstance(CopyBuffer));
-                CopyBuffer = GraphicList.get(GraphicList.size() - 1);
+                CopyBuffer = GraphicList.get(GraphicList.size() - 1);//neues element in den copybuffer legen für allfälliges erneutes aufrufen der Paste-Aktion
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             }
