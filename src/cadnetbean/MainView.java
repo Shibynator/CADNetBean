@@ -131,12 +131,11 @@ public class MainView extends javax.swing.JFrame implements Serializable {
         CheckBoxToolBar = new javax.swing.JCheckBoxMenuItem();
         MenuItemBackgroundcolor = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("CAD by ZioeFeu");
         setBackground(java.awt.SystemColor.activeCaption);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("MainView"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(650, 500));
 
         ToolBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ToolBar.setRollover(true);
