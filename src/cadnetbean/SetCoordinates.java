@@ -10,10 +10,12 @@
  *
  * Project:	CADNetBean
  *
- * Describtion:	Defines the Popup-Window to set Coordinates of a geometric 
- *              Objekt
+ * Describtion:	Popupfenster um die Koordinaten eines ausgewählten Objektes zu
+ *              verändern.
  *
- * Revision:	0.0	file created 0.1 modified	FB 01.06.2014
+ * Revision:	0.0	file created 
+ *              0.1     modified	FB 03.06.2014
+ *              1.0     final release   FB 09.06.2014
  * *****************************************************************************
  */
 
@@ -79,6 +81,7 @@ public class SetCoordinates extends javax.swing.JFrame {
         }
     }
     
+    // Anzeigen der Koordinaten des ausgewählten Objektes
     private void GetCoordinate(CADShape Form){
         XCoord.setText(new String(Integer.toString(Form.getX())));
         YCoord.setText(new String(Integer.toString(Form.getY())));
@@ -86,6 +89,7 @@ public class SetCoordinates extends javax.swing.JFrame {
         Width.setText(new String(Integer.toString(Form.getHeight())));
     }
     
+    // Eingegebene Koordinaten an das Objekt übergeben
     public void SetCoordinate(CADShape Form){
         Form.setLocation(new Integer(XCoord.getText()), new Integer(YCoord.getText()));
         Form.setSize(new Integer(Length.getText()), new Integer(Width.getText()));
@@ -231,10 +235,12 @@ public class SetCoordinates extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Wenn "cancel" gedrückt wurde, Fenster schliessen
     private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelActionPerformed
         setVisible(false);
     }//GEN-LAST:event_ButtonCancelActionPerformed
 
+    // Wenn "accept" gedrückt wurde, Koordinaten übernehmen und Fenster schliessen
     private void ButtonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAcceptActionPerformed
         SetCoordinate(Form);
         setVisible(false);

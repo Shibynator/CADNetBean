@@ -1,38 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * *****************************************************************************
+ * Class:	SaveLoad.java
+ * *****************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ *
+ * Author:	Feuz Bruno
+ *
+ * Datum:       30.05.2014
+ *
+ * Project:	CADNetBean
+ *
+ * Describtion:	Beinhaltet die Methoden zum abspeichern der Zeichnung.
+ *              Methoden wurden aus den Handouts von Herrn Krucker übernommen
+ *
+ * Revision:	0.0	file created 
+ *              0.1     modified	FB 30.05.2014
+ *              1.0     final release   FB 09.06.2104
+ * *****************************************************************************
  */
+
+// package definition
 package cadnetbean;
 
+// importiert packages und Bibliotheken
 import geometricforms.CADShape;
-import java.beans.PropertyChangeListener;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author Bruno
- */
-public class SaveLoad implements Serializable {
-    public String FileName;
 
+public class SaveLoad implements Serializable {
+    
+    // Attribut 
+    public String FileName;     // Name des Files zum abspeichern
+
+    /*
+    * Methode zum speichern der Zeichnung. 
+    * Überprüft, ob die Zeichnung schon einmal abgespeichert wurde oder ob die
+    * Option "save as..." gedrückt wurde.
+    * Wenn nicht gespeichert oder "save as.." Popupfenster "Speichern unter..."
+    * aufrufen. Neue Datei wird erzeugt.
+    * Wenn Datei schon einmal gespeichert, alte Version überschreiben.
+    * Warnung ausgeben, wenn File nicht gespeichert werden konnte
+    */
     public void savefile(List<CADShape> data, boolean SaveAs) {
         if ((MainView.Saved == false) || (SaveAs==true)) {
             JFileChooser SAVE = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter(".cad files", "cad");
             SAVE.setFileFilter(filter);
-            SAVE.setDialogTitle("Speichern unter ...");
+            SAVE.setDialogTitle("Save as ...");
             SAVE.setDialogType(JFileChooser.SAVE_DIALOG);
             int returnVal = SAVE.showSaveDialog(null); // Dialog an Parent-Window anhaengen 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -60,6 +81,7 @@ public class SaveLoad implements Serializable {
 
     /*
      * Aus Handout "Serialisierung in JAVA" von G.Krucker übernommen
+     * Schreibt die zu speichernde Arrayliste in das File
      */
     public void saveToFile(String filename, List<CADShape> data) throws IOException {
         // Ausschreiben der Liste in das File 
