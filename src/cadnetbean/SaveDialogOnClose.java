@@ -1,24 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * *****************************************************************************
+ * Class:	SaveDialogOnClose.java
+ * *****************************************************************************
+ * Company:	Berner Fachhochschule für Technik und Informatik
+ *
+ * Author:	Feuz Bruno
+ *
+ * Datum:       20.05.2014
+ *
+ * Project:	CADNetBean
+ *
+ * Describtion:	Definition des Popupfensters, welches beim schliessen des 
+ *              Hauptfensters aufgerufen wird, wenn die Zeichnung nicht 
+ *              gespeichert wurde.
+ *              Nutzer kann entscheiden, ob er speichern möchte oder nicht.
+ *
+ * Revision:	0.0	file created 
+ *              0.1     modified	FB 20.05.2014
+ *              1.0     final release   FB 09.06.2104
+ * *****************************************************************************
  */
 
+// Package dfinition
 package cadnetbean;
 
+// Importiert Packages und Bibliotheken
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Bruno
- */
+
 public class SaveDialogOnClose {
-    int Option;
-    String Title = "File not saved";
+    // Attributes
+    int Option;    // Hilfsattribut, liefert den Wert des gedrückten Knopfes    
+    String Title = "File not saved";    // Titel des Popupfensters
+    // Angezeigter Warntext
     String Message = "File not saved. Would you like to save befor close?";
     
     SaveDialogOnClose(){
-        //JOptionPane.showMessageDialog(null, Message, Title, JOptionPane.OK_CANCEL_OPTION);
+        
         Option = JOptionPane.showOptionDialog(null, Message, Title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, Title);
     }
 }
