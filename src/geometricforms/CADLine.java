@@ -25,14 +25,9 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 
-/**
- *
- * @author Daxx
- */
-
 public class CADLine extends CADShape{
     
-    public boolean Mirroring=false;
+    public boolean Mirroring=false;//wird gebraucht um in alle Richtungen Linien ziehen zu können
     
     public CADLine(){       
     }
@@ -49,9 +44,9 @@ public class CADLine extends CADShape{
     public Shape getShapeStyle() {
                
         if(Mirroring)
-            ((Line2D)ShapeStyle).setLine(getWidth(),0 , 0, getHeight());
+            ((Line2D)ShapeStyle).setLine(getWidth(),0 , 0, getHeight());//diagonale Linie von rechts nach links
         else
-            ((Line2D)ShapeStyle).setLine(0,0 , getWidth(), getHeight());
+            ((Line2D)ShapeStyle).setLine(0,0 , getWidth(), getHeight());//diagonale Linie von links nach rechts
         
         return ShapeStyle;
     }

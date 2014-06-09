@@ -24,10 +24,6 @@ package geometricforms;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-/**
- *
- * @author Daxx
- */
 public class CADSquare extends CADRectangle {
     
     public CADSquare() {
@@ -47,6 +43,6 @@ public class CADSquare extends CADRectangle {
 
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		super.setBounds(x, y, height, height);
+		super.setBounds(x, y, height, height);//dafür sorgen dass die Fenstergrösse immer quadratisch bleibt
 	}  
 }
