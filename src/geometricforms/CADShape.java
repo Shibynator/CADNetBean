@@ -98,7 +98,7 @@ public abstract class CADShape extends JPanel {
     
     public CADShape(CADShape copy) {
 
-        setBounds(copy.getBounds().x+10,copy.getBounds().y+10,copy.getBounds().width+10,copy.getBounds().height+10);
+        setBounds(copy.getBounds().x+10,copy.getBounds().y+10,copy.getBounds().width,copy.getBounds().height);
         DrawColor=copy.DrawColor;
         FillColor=copy.FillColor;
         
