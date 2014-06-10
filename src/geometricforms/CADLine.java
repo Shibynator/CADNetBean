@@ -37,7 +37,8 @@ public class CADLine extends CADShape{
     }
     
     public CADLine(CADShape copy){
-	super(copy);	
+	super(copy);
+        setBounds(copy.getBounds().x+50,copy.getBounds().y+30,copy.getBounds().width,copy.getBounds().height);
     }
 
     @Override

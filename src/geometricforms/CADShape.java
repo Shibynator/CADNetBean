@@ -101,6 +101,7 @@ public abstract class CADShape extends JPanel {
         setBounds(copy.getBounds().x+10,copy.getBounds().y+10,copy.getBounds().width,copy.getBounds().height);
         DrawColor=copy.DrawColor;
         FillColor=copy.FillColor;
+        LineThickness=copy.LineThickness;
         
         Initialise();
         
